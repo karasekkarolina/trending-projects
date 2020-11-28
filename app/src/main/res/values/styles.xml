@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextAppearance.MaterialComponents.Body1.Grey">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="TextAppearance.MaterialComponents.Body2.Grey">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="TextAppearance.MaterialComponents.Body1.LightGrey">
+        <item name="android:textColor">@color/text_tertiary</item>
+    </style>
+
+    <style name="TextAppearance.MaterialComponents.Body2.LightGrey">
+        <item name="android:textColor">@color/text_tertiary</item>
+    </style>
+
+</resources>

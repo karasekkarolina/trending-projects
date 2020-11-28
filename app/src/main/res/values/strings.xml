@@ -1,0 +1,20 @@
+<resources>
+    <!-- General -->
+    <string name="app_name">Trending Projects</string>
+    <string name="no_data_found">No data found</string>
+    <string name="error_occurred">An error occurred</string>
+    <string name="offline_error">It seems you\'re offline. Please check your internet connection.</string>
+
+    <!-- Repositories -->
+    <string name="title_repositories">Trending repositories</string>
+    <string name="repository_loading_failed">Repository loading failed</string>
+    <string name="repository_list_loading_failed">Repository list loading failed</string>
+
+    <!-- Repository detail -->
+    <string name="title_repository_detail">Repository detail</string>
+
+    <!-- Developers -->
+    <string name="title_developers">Developers</string>
+    <string name="developer_list_loading_failed">Developer list loading failed</string>
+
+</resources>
