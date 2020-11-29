@@ -4,8 +4,8 @@ import android.content.Context
 import cz.blackchameleon.data.local.LocalDeveloperSource
 import cz.blackchameleon.domain.Developer
 import cz.blackchameleon.trendingprojects.framework.database.Database
-import cz.blackchameleon.trendingprojects.framework.database.DeveloperDao
-import cz.blackchameleon.trendingprojects.framework.database.DeveloperDb
+import cz.blackchameleon.trendingprojects.framework.database.dao.DeveloperDao
+import cz.blackchameleon.trendingprojects.framework.database.db.DeveloperDb
 
 /**
  * Local source implementation for getting developer object from DB

@@ -5,6 +5,10 @@ import cz.blackchameleon.data.local.LocalRepositorySource
 import cz.blackchameleon.domain.Contributor
 import cz.blackchameleon.domain.Repository
 import cz.blackchameleon.trendingprojects.framework.database.*
+import cz.blackchameleon.trendingprojects.framework.database.dao.ContributorDao
+import cz.blackchameleon.trendingprojects.framework.database.dao.RepositoryDao
+import cz.blackchameleon.trendingprojects.framework.database.db.ContributorDb
+import cz.blackchameleon.trendingprojects.framework.database.db.RepositoryDb
 
 /**
  * Local source implementation for getting repository object from DB

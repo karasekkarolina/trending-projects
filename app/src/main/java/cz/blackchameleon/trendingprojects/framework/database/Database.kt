@@ -4,6 +4,12 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import cz.blackchameleon.trendingprojects.framework.database.dao.ContributorDao
+import cz.blackchameleon.trendingprojects.framework.database.dao.DeveloperDao
+import cz.blackchameleon.trendingprojects.framework.database.dao.RepositoryDao
+import cz.blackchameleon.trendingprojects.framework.database.db.ContributorDb
+import cz.blackchameleon.trendingprojects.framework.database.db.DeveloperDb
+import cz.blackchameleon.trendingprojects.framework.database.db.RepositoryDb
 
 /**
  * Room database object with 2 given entities [DeveloperDao], [RepositoryDao]

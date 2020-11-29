@@ -1,4 +1,4 @@
-package cz.blackchameleon.trendingprojects.framework.database
+package cz.blackchameleon.trendingprojects.framework.database.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

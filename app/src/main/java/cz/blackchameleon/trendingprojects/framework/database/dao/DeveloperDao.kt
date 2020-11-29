@@ -1,7 +1,8 @@
-package cz.blackchameleon.trendingprojects.framework.database
+package cz.blackchameleon.trendingprojects.framework.database.dao
 
 import androidx.room.Dao
 import androidx.room.Query
+import cz.blackchameleon.trendingprojects.framework.database.db.DeveloperDb
 
 /**
  * DB operations for developers
