@@ -9,6 +9,12 @@
     <string name="title_repositories">Trending repositories</string>
     <string name="repository_loading_failed">Repository loading failed</string>
     <string name="repository_list_loading_failed">Repository list loading failed</string>
+    <string name="current_stars">%1$s %2$s</string>
+    <string name="overall_stars">Overall stars: %s</string>
+    <string name="author_repo_name"><![CDATA[%1$s / <a href="%2$s">%3$s</a>]]></string>
+    <string name="today">today</string>
+    <string name="weekly">weekly</string>
+    <string name="monthly">monthly</string>
 
     <!-- Repository detail -->
     <string name="title_repository_detail">Repository detail</string>

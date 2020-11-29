@@ -50,8 +50,4 @@ class RepositoryViewModel(
             }
         }
     }
-
-    fun onItemClicked(repository: Repository) {
-
-    }
 }

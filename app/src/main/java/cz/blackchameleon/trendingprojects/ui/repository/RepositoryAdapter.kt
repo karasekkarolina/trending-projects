@@ -1,8 +1,12 @@
 package cz.blackchameleon.trendingprojects.ui.repository
 
+import android.graphics.*
+import android.text.Spannable
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -38,10 +42,34 @@ class RepositoryAdapter(
         fun bind(item: Repository) {
             itemView.apply {
 
-                name.text = item.name
-                author.text = item.author
+                name.apply {
+                    text = (HtmlCompat.fromHtml(
+                        resources.getString(
+                            R.string.author_repo_name,
+                            item.author,
+                            item.url,
+                            item.name
+                        ), HtmlCompat.FROM_HTML_MODE_LEGACY
+                    ) as Spannable)
+                    movementMethod = LinkMovementMethod.getInstance()
+                }
                 description.text = item.description
-                current_period_stars.text = item.currentPeriodStars
+                val periodInt = 1
+                val period = when (periodInt) {
+                    1 -> resources.getString(R.string.today)
+                    2 -> resources.getString(R.string.weekly)
+                    3 -> resources.getString(R.string.monthly)
+                    else -> resources.getString(R.string.today)
+                }
+                current_period_stars.text = resources.getString(R.string.current_stars, item.currentPeriodStars, period)
+                overall_stars.text = resources.getString(R.string.overall_stars, item.stars)
+                val color = if (item.languageColor.isBlank() || item.languageColor.isEmpty()) {
+                    Color.TRANSPARENT
+                } else {
+                    Color.parseColor(item.languageColor)
+                }
+                language_color.background.setTint(color)
+                language.text = item.language
                 main_content.setOnClickListener { clickListener(item) }
             }
         }
