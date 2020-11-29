@@ -14,11 +14,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers
  */
 class RemoteRepositorySourceImpl(private val repositoryApi: RepositoryApi) :
     RemoteRepositorySource {
-    override suspend fun fetchRepository(): Single<Repository> =
-        repositoryApi.getRepository()
-            .map { it.toRepository() }
-            .subscribeOn(Schedulers.io())
-
     override suspend fun fetchRepositories(): Single<List<Repository>> =
         repositoryApi.getRepositories()
             .map { list ->

@@ -3,6 +3,7 @@ package cz.blackchameleon.trendingprojects.framework.database
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 
 /**
  * Room database object with 2 given entities [DeveloperDao], [RepositoryDao]
@@ -12,14 +13,18 @@ import androidx.room.RoomDatabase
 @androidx.room.Database(
     entities = [
         DeveloperDb::class,
-        RepositoryDb::class
-    ], exportSchema = false, version = 1
+        RepositoryDb::class,
+        ContributorDb::class
+    ], exportSchema = false, version = 2
 )
+@TypeConverters(DeveloperRepoTypeConverter::class)
 abstract class Database : RoomDatabase() {
 
     abstract fun developerDao(): DeveloperDao
 
     abstract fun repositoryDao(): RepositoryDao
+
+    abstract fun contributorDao(): ContributorDao
 
     companion object {
         private const val DB_NAME = "database"

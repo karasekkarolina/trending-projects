@@ -8,7 +8,7 @@ import cz.blackchameleon.domain.Repository
  * @author Karolina Klepackova on 27.11.2020.
  */
 interface LocalRepositorySource {
-    suspend fun getRepository(id: String): Repository?
+    suspend fun getRepository(url: String): Repository?
 
     suspend fun getRepositories(): List<Repository>?
 

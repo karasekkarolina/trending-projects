@@ -2,6 +2,7 @@ package cz.blackchameleon.trendingprojects.framework.remote
 
 import android.os.Parcelable
 import cz.blackchameleon.domain.Developer
+import cz.blackchameleon.domain.DeveloperRepo
 import kotlinx.android.parcel.Parcelize
 
 /**
@@ -11,11 +12,19 @@ import kotlinx.android.parcel.Parcelize
  */
 @Parcelize
 data class DeveloperMo(
-    val id: String?,
-    val name: String?
+    val username: String?,
+    val name: String?,
+    val url: String?,
+    val sponsorUrl: String?,
+    val avatar: String?,
+    val repo: DeveloperRepoMo?
 ) : Parcelable {
     fun toDeveloper() = Developer(
-        id ?: "",
-        name ?: ""
+        username ?: "",
+        name ?: "",
+        url ?: "",
+        sponsorUrl ?: "",
+        avatar ?: "",
+        repo?.toDeveloperRepo() ?: DeveloperRepo("", "", "")
     )
 }

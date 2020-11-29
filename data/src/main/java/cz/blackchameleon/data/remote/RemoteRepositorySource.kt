@@ -9,7 +9,5 @@ import io.reactivex.rxjava3.core.Single
  * @author Karolina Klepackova on 27.11.2020.
  */
 interface RemoteRepositorySource {
-    suspend fun fetchRepository() : Single<Repository>
-
     suspend fun fetchRepositories() : Single<List<Repository>>
 }

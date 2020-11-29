@@ -10,6 +10,6 @@ import retrofit2.http.GET
  * @author Karolina Klepackova on 27.11.2020.
  */
 interface DeveloperApi {
-    @GET("/todo")
+    @GET("/developers")
     fun getDevelopers(): Single<List<DeveloperMo>>
 }

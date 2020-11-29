@@ -6,5 +6,5 @@ package cz.blackchameleon.trendingprojects
  * @author Karolina Klepackova on 27.11.2020.
  */
 object UrlConst {
-    const val BASE_URL: String = "https://todo"
+    const val BASE_URL: String = "http://github-trending.blackchameleon.cz:8080"
 }

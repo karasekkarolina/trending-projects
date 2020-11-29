@@ -15,8 +15,8 @@ interface RepositoryDao : BaseDao<RepositoryDb> {
     @Query("SELECT * FROM repositories")
     suspend fun getRepositories(): List<RepositoryDb>
 
-    @Query("SELECT * FROM repositories WHERE id=:id ")
-    suspend fun getRepository(id: String): RepositoryDb
+    @Query("SELECT * FROM repositories WHERE url=:url ")
+    suspend fun getRepository(url: String): RepositoryDb
 
     @Query("DELETE FROM repositories")
     suspend fun deleteAll()

@@ -30,7 +30,7 @@ class LocalDeveloperSourceImpl(
         developer.run {
             developerDao?.insert(
                 DeveloperDb(
-                    id, name
+                    username, name, url, sponsorUrl, avatar, repo
                 )
             )
         }

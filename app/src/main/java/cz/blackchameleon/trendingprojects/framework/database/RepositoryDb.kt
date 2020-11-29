@@ -13,16 +13,41 @@ import cz.blackchameleon.domain.Repository
  */
 @Entity(tableName = "repositories")
 class RepositoryDb(
-    @PrimaryKey
-    var id: String,
+    @ColumnInfo(name = "author")
+    var author: String,
     @ColumnInfo(name = "name")
-    var name: String
+    var name: String,
+    @ColumnInfo(name = "avatar")
+    var avatar: String,
+    @PrimaryKey
+    @ColumnInfo(name = "url")
+    var url: String,
+    @ColumnInfo(name = "description")
+    var description: String,
+    @ColumnInfo(name = "language")
+    var language: String,
+    @ColumnInfo(name = "languageColor")
+    var languageColor: String,
+    @ColumnInfo(name = "stars")
+    var stars: String,
+    @ColumnInfo(name = "forks")
+    var forks: String,
+    @ColumnInfo(name = "currentPeriodStars")
+    var currentPeriodStars: String
 ) {
     /**
      * Conversion of DB object into [Repository]
      */
     fun toRepository(): Repository = Repository(
-        id = this.id,
-        name = this.name
+        author,
+        name,
+        avatar,
+        url,
+        description,
+        language,
+        languageColor,
+        stars,
+        forks,
+        currentPeriodStars
     )
 }

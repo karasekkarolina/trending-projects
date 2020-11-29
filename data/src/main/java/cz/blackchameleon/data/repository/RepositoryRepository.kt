@@ -17,18 +17,11 @@ class RepositoryRepository(
     private val localRepositorySource: LocalRepositorySource,
     private val remoteRepositorySource: RemoteRepositorySource
 ) {
-    suspend fun getRepository(id: String): Result<Repository> =
+    suspend fun getRepository(url: String): Result<Repository> =
         withContext(coroutineContext) {
-            localRepositorySource.getRepository(id)?.let {
+            localRepositorySource.getRepository(url)?.let {
                 return@withContext Result.Success(it)
-            }
-
-            try {
-                val product = remoteRepositorySource.fetchRepository().blockingGet()
-                return@withContext Result.Success(product)
-            } catch (e: RuntimeException) {
-                return@withContext Result.Error<Repository>(e.message)
-            }
+            } ?: Result.Error("Repository not found")
         }
 
     suspend fun getRepositories(): Result<List<Repository>> =

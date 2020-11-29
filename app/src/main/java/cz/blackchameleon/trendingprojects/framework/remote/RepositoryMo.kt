@@ -11,11 +11,29 @@ import kotlinx.android.parcel.Parcelize
  */
 @Parcelize
 data class RepositoryMo(
-    val id: String?,
-    val name: String?
+    val author: String?,
+    val name: String?,
+    val avatar: String?,
+    val url: String?,
+    val description: String?,
+    val language: String?,
+    val languageColor: String?,
+    val stars: String?,
+    val forks: String?,
+    val currentPeriodStars: String?,
+    val builtBy: List<ContributorMo>?
 ) : Parcelable {
     fun toRepository() = Repository(
-        id ?: "",
-        name ?: ""
+        author ?: "",
+        name ?: "",
+        avatar ?: "",
+        url ?: "",
+        description ?: "",
+        language ?: "",
+        languageColor ?: "",
+        stars ?: "",
+        forks ?: "",
+        currentPeriodStars ?: "",
+        builtBy?.map { it.toContributor() } ?: listOf()
     )
 }

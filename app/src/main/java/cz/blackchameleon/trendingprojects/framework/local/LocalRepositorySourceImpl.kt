@@ -2,10 +2,9 @@ package cz.blackchameleon.trendingprojects.framework.local
 
 import android.content.Context
 import cz.blackchameleon.data.local.LocalRepositorySource
+import cz.blackchameleon.domain.Contributor
 import cz.blackchameleon.domain.Repository
-import cz.blackchameleon.trendingprojects.framework.database.Database
-import cz.blackchameleon.trendingprojects.framework.database.RepositoryDao
-import cz.blackchameleon.trendingprojects.framework.database.RepositoryDb
+import cz.blackchameleon.trendingprojects.framework.database.*
 
 /**
  * Local source implementation for getting repository object from DB
@@ -18,23 +17,69 @@ class LocalRepositorySourceImpl(
 ) : LocalRepositorySource {
     private val database = Database.getInstance(context)
     private val repositoryDao: RepositoryDao?
+    private val contributorDao: ContributorDao?
 
     init {
         repositoryDao = database?.repositoryDao()
+        contributorDao = database?.contributorDao()
     }
 
-    override suspend fun getRepository(id: String): Repository? = repositoryDao?.getRepository(id)?.toRepository()
+    override suspend fun getRepository(url: String): Repository? {
+        val repository = repositoryDao?.getRepository(url)?.toRepository()
+        val contributors: List<Contributor> = repository?.url?.let { repositoryUrl ->
+            contributorDao?.findContributorsForRepository(repositoryUrl)?.map {
+                it.toContributor()
+            }
+        } ?: emptyList()
+        repository?.apply {
+            builtBy = contributors
+        }
+        return repository
+    }
 
-    override suspend fun getRepositories(): List<Repository>? =
-        repositoryDao?.getRepositories()?.map { it.toRepository() }
+    override suspend fun getRepositories(): List<Repository>? {
+        val repositories = repositoryDao?.getRepositories()?.map { it.toRepository() }
+        repositories?.forEach { repository ->
+            val contributors: List<Contributor> = repository.url.let { repositoryUrl ->
+                contributorDao?.findContributorsForRepository(repositoryUrl)?.map {
+                    it.toContributor()
+                }
+            } ?: emptyList()
+            repository.apply {
+                builtBy = contributors
+            }
+        }
+        return repositories
+    }
 
     override suspend fun saveRepositories(repository: Repository) {
         repository.run {
+            repositoryDao?.deleteAll()
             repositoryDao?.insert(
                 RepositoryDb(
-                    id, name
+                    author,
+                    name,
+                    avatar,
+                    url,
+                    description,
+                    language,
+                    languageColor,
+                    stars,
+                    forks,
+                    currentPeriodStars
                 )
             )
+
+            repository.builtBy.forEach {
+                contributorDao?.insert(
+                    ContributorDb(
+                        it.username,
+                        it.href,
+                        it.avatar,
+                        repository.url
+                    )
+                )
+            }
         }
     }
 

@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import cz.blackchameleon.domain.Developer
+import cz.blackchameleon.domain.DeveloperRepo
 
 /**
  * Developer entity representation in DB
@@ -13,16 +14,24 @@ import cz.blackchameleon.domain.Developer
  */
 @Entity(tableName = "developers")
 class DeveloperDb(
-    @PrimaryKey
-    var id: String,
+    @ColumnInfo(name = "username")
+    var username: String,
     @ColumnInfo(name = "name")
-    var name: String
+    var name: String,
+    @PrimaryKey
+    @ColumnInfo(name = "url")
+    var url: String,
+    @ColumnInfo(name = "sponsorUrl")
+    var sponsorUrl: String,
+    @ColumnInfo(name = "avatar")
+    var avatar: String,
+    @ColumnInfo(name = "repo")
+    var repo: DeveloperRepo
 ) {
     /**
      * Conversion of DB object into [Developer]
      */
     fun toDeveloper(): Developer = Developer(
-        id = this.id,
-        name = this.name
+        username, name, url, sponsorUrl, avatar, repo
     )
 }

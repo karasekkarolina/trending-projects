@@ -10,9 +10,6 @@ import retrofit2.http.GET
  * @author Karolina Klepackova on 27.11.2020.
  */
 interface RepositoryApi {
-    @GET("/todo")
-    fun getRepository(): Single<RepositoryMo>
-
-    @GET("/todo")
+    @GET("/repositories")
     fun getRepositories(): Single<List<RepositoryMo>>
 }
