@@ -17,16 +17,19 @@ class LanguageRepository(
     private val localLanguageSource: LocalLanguageSource,
     private val remoteLanguageSource: RemoteLanguageSource
 ) {
-    suspend fun getLanguages(): Result<List<Language>> =
+    suspend fun getLanguages(force: Boolean): Result<List<Language>> =
         withContext(coroutineContext) {
             localLanguageSource.getLanguages()?.let {
-                if (it.isNotEmpty()) {
+                if (it.isNotEmpty() && !force) {
                     return@withContext Result.Success(it)
                 }
             }
 
             try {
                 val languages = remoteLanguageSource.fetchLanguages().blockingGet()
+                if (force) {
+                    localLanguageSource.clean()
+                }
                 saveLanguages(languages)
                 return@withContext Result.Success(languages)
             } catch (e: RuntimeException) {

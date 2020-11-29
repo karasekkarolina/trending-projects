@@ -28,7 +28,6 @@
         tools:layout="@layout/fragment_repository_detail">
         <argument
             android:name="repository"
-            android:defaultValue="@null"
             app:argType="cz.blackchameleon.domain.Repository"
             app:nullable="true" />
     </fragment>

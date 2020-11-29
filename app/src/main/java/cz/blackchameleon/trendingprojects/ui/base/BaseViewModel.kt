@@ -15,10 +15,10 @@ abstract class BaseViewModel : ViewModel() {
     val showEmptyState: LiveData<Unit> = _showEmptyState
 
     // Provides view model data initialization
-    abstract fun initData()
+    abstract fun initData(force: Boolean)
 
     fun onSwipeReload() {
-        initData()
+        initData(true)
     }
 
     fun showEmptyState() {

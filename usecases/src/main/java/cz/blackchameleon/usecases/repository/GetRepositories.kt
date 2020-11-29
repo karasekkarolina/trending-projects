@@ -13,5 +13,6 @@ import cz.blackchameleon.data.Result
 class GetRepositories(
     private val repositoryRepository: RepositoryRepository
 ) {
-    suspend operator fun invoke(): Result<List<Repository>> = repositoryRepository.getRepositories()
+    suspend operator fun invoke(force: Boolean): Result<List<Repository>> =
+        repositoryRepository.getRepositories(force)
 }

@@ -33,12 +33,12 @@ class RepositoryViewModel(
     val repositories: LiveData<List<Repository>> = _repositories
 
     init {
-        initData()
+        initData(false)
     }
 
-    override fun initData() {
+    override fun initData(force: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
-            getRepositories().let {
+            getRepositories(force).let {
                 when (it) {
                     is Result.Success -> {
                         _repositories.postValue(it.data)

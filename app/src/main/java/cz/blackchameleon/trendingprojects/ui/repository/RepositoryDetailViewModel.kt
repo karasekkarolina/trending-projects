@@ -29,10 +29,10 @@ class RepositoryDetailViewModel(
     var repositoryId: String? = null
 
     init {
-        initData()
+        initData(false)
     }
 
-    override fun initData() {
+    override fun initData(force: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
             repositoryId?.let { repositoryId ->
                 getRepository(repositoryId).let {

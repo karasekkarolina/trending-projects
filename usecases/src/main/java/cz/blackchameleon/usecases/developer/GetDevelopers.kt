@@ -13,5 +13,6 @@ import cz.blackchameleon.data.Result
 class GetDevelopers(
     private val developerRepository: DeveloperRepository
 ) {
-    suspend operator fun invoke(): Result<List<Developer>> = developerRepository.getDevelopers()
+    suspend operator fun invoke(force: Boolean): Result<List<Developer>> =
+        developerRepository.getDevelopers(force)
 }

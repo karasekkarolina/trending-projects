@@ -10,5 +10,4 @@
             android:id="@+id/navigation_developer"
             android:icon="@drawable/ic_developer"
             android:title="@string/title_developers" />
-
 </menu>

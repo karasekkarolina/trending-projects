@@ -3,8 +3,9 @@ package cz.blackchameleon.trendingprojects.ui.repository
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import cz.blackchameleon.trendingprojects.R
 import cz.blackchameleon.trendingprojects.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_repository.*
@@ -12,28 +13,29 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Fragment that handles UI for repository list
+ * * @suppress Unchecked cast applied on List adapter cast
  * @see BaseFragment
  *
  * @author Karolina Klepackova on 27.11.2020.
  */
+@Suppress("UNCHECKED_CAST")
 class RepositoryFragment : BaseFragment(R.layout.fragment_repository) {
 
     override val viewModel: RepositoryViewModel by viewModel()
 
     private val repositoryAdapter: RepositoryAdapter by lazy {
-        RepositoryAdapter(viewModel::onItemClicked)
+        RepositoryAdapter {
+            findNavController().navigate(RepositoryFragmentDirections.actionRepositoryDetailFragment(it))
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        repository_list.apply {
-            adapter = repositoryAdapter
-            layoutManager = LinearLayoutManager(activity)
-            addItemDecoration(
-                DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-            )
-        }
+        initRecycler(
+            repository_list,
+            repositoryAdapter as ListAdapter<Any, RecyclerView.ViewHolder>
+        )
         initObservers()
         setupListeners()
     }
@@ -54,7 +56,7 @@ class RepositoryFragment : BaseFragment(R.layout.fragment_repository) {
     }
 
     private fun setLoadingVisibility(visibility: Boolean) {
-        swipe_layout.isVisible = visibility
+        swipe_layout.isRefreshing = visibility
         overlay.isVisible = visibility
     }
 }

@@ -17,16 +17,19 @@ class DeveloperRepository(
     private val localDeveloperSource: LocalDeveloperSource,
     private val remoteDeveloperSource: RemoteDeveloperSource
 ) {
-    suspend fun getDevelopers(): Result<List<Developer>> =
+    suspend fun getDevelopers(force: Boolean): Result<List<Developer>> =
         withContext(coroutineContext) {
             localDeveloperSource.getDevelopers()?.let {
-                if (it.isNotEmpty()) {
+                if (it.isNotEmpty() && !force) {
                     return@withContext Result.Success(it)
                 }
             }
 
             try {
                 val developers = remoteDeveloperSource.fetchDevelopers().blockingGet()
+                if (force) {
+                    localDeveloperSource.clean()
+                }
                 saveDevelopers(developers)
                 return@withContext Result.Success(developers)
             } catch (e: RuntimeException) {

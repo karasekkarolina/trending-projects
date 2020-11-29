@@ -24,16 +24,19 @@ class RepositoryRepository(
             } ?: Result.Error("Repository not found")
         }
 
-    suspend fun getRepositories(): Result<List<Repository>> =
+    suspend fun getRepositories(force: Boolean): Result<List<Repository>> =
         withContext(coroutineContext) {
             localRepositorySource.getRepositories()?.let {
-                if (it.isNotEmpty()) {
-                    return@withContext Result.Success(it)
+                if (it.isNotEmpty() && !force) {
+                   return@withContext Result.Success(it)
                 }
             }
 
             try {
                 val repositories = remoteRepositorySource.fetchRepositories().blockingGet()
+                if (force) {
+                    localRepositorySource.clean()
+                }
                 saveRepositories(repositories)
                 return@withContext Result.Success(repositories)
             } catch (e: RuntimeException) {

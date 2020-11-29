@@ -58,7 +58,6 @@ class LocalRepositorySourceImpl(
 
     override suspend fun saveRepository(repository: Repository) {
         repository.run {
-            repositoryDao?.deleteAll()
             repositoryDao?.insert(
                 RepositoryDb(
                     author,

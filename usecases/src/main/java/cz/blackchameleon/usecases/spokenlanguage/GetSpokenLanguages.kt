@@ -13,6 +13,6 @@ import cz.blackchameleon.domain.SpokenLanguage
 class GetSpokenLanguages(
     private val spokenLanguageRepository: SpokenLanguageRepository
 ) {
-    suspend operator fun invoke(): Result<List<SpokenLanguage>> =
-        spokenLanguageRepository.getSpokenLanguages()
+    suspend operator fun invoke(force: Boolean): Result<List<SpokenLanguage>> =
+        spokenLanguageRepository.getSpokenLanguages(force)
 }

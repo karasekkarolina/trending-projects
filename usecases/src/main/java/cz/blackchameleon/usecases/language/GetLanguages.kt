@@ -13,5 +13,6 @@ import cz.blackchameleon.domain.Language
 class GetLanguages(
     private val languageRepository: LanguageRepository
 ) {
-    suspend operator fun invoke(): Result<List<Language>> = languageRepository.getLanguages()
+    suspend operator fun invoke(force: Boolean): Result<List<Language>> =
+        languageRepository.getLanguages(force)
 }

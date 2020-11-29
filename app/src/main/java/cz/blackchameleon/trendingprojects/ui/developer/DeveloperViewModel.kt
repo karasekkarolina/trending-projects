@@ -27,12 +27,12 @@ class DeveloperViewModel(
     val developers: LiveData<List<Developer>> = _developers
 
     init {
-        initData()
+        initData(false)
     }
 
-    override fun initData() {
+    override fun initData(force: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
-            getDevelopers().let {
+            getDevelopers(force).let {
                 when (it) {
                     is Result.Success -> {
                         _developers.postValue(it.data)

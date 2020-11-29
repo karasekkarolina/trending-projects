@@ -17,16 +17,19 @@ class SpokenLanguageRepository(
     private val localSpokenLanguageSource: LocalSpokenLanguageSource,
     private val remoteSpokenLanguageSource: RemoteSpokenLanguageSource
 ) {
-    suspend fun getSpokenLanguages(): Result<List<SpokenLanguage>> =
+    suspend fun getSpokenLanguages(force: Boolean): Result<List<SpokenLanguage>> =
         withContext(coroutineContext) {
             localSpokenLanguageSource.getSpokenLanguages()?.let {
-                if (it.isNotEmpty()) {
+                if (it.isNotEmpty() && !force) {
                     return@withContext Result.Success(it)
                 }
             }
 
             try {
                 val spokenLanguages = remoteSpokenLanguageSource.fetchSpokenLanguages().blockingGet()
+                if (force) {
+                    localSpokenLanguageSource.clean()
+                }
                 saveSpokenLanguages(spokenLanguages)
                 return@withContext Result.Success(spokenLanguages)
             } catch (e: RuntimeException) {
