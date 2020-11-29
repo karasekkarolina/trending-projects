@@ -1,13 +1,18 @@
 package cz.blackchameleon.trendingprojects.ui.developer
 
+import android.text.Spannable
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import cz.blackchameleon.domain.Developer
 import cz.blackchameleon.trendingprojects.R
+import cz.blackchameleon.trendingprojects.extensions.removeUnderlines
+import cz.blackchameleon.trendingprojects.extensions.setImage
 import kotlinx.android.synthetic.main.item_developer.view.*
 
 /**
@@ -36,9 +41,36 @@ class DeveloperAdapter : ListAdapter<Developer, DeveloperAdapter.ViewHolder>(
         fun bind(item: Developer) {
             itemView.apply {
 
-                username.text = item.username
-                url.text = item.url
+                avatar.setImage(item.avatar)
+                full_name.apply {
+                    text = (HtmlCompat.fromHtml(
+                        resources.getString(
+                            R.string.url, item.name, item.url, item.username
+                        ), HtmlCompat.FROM_HTML_MODE_LEGACY
+                    ) as Spannable)
+                    movementMethod = LinkMovementMethod.getInstance()
+                }
+                repository.apply {
+                    text = (HtmlCompat.fromHtml(
+                        resources.getString(
+                            R.string.repository_url,
+                            item.repo.url,
+                            item.repo.name
+                        ), HtmlCompat.FROM_HTML_MODE_LEGACY
+                    ) as Spannable)
+                    movementMethod = LinkMovementMethod.getInstance()
+                }
                 description.text = item.repo.description
+
+                sponsor_url.apply {
+                    text = (HtmlCompat.fromHtml(
+                        resources.getString(
+                            R.string.sponsor_url,
+                            item.sponsorUrl
+                        ), HtmlCompat.FROM_HTML_MODE_LEGACY
+                    ) as Spannable).removeUnderlines()
+                    movementMethod = LinkMovementMethod.getInstance()
+                }
             }
         }
     }

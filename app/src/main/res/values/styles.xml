@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="TextAppearance.MaterialComponents.Body1.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="TextAppearance.MaterialComponents.Body1.Grey">
         <item name="android:textColor">@color/text_secondary</item>
     </style>

@@ -12,6 +12,7 @@
 
     <TextView
         android:id="@+id/name"
+        style="@style/TextAppearance.MaterialComponents.Body1.Bold"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_padding_normal"
@@ -28,6 +29,7 @@
 
     <TextView
         android:id="@+id/author"
+        style="@style/TextAppearance.MaterialComponents.Body1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_padding_normal"
@@ -45,6 +47,7 @@
 
     <TextView
         android:id="@+id/description"
+        style="@style/TextAppearance.MaterialComponents.Body1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_padding_normal"
@@ -62,11 +65,14 @@
 
     <TextView
         android:id="@+id/current_period_stars"
+        style="@style/TextAppearance.MaterialComponents.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_padding_xsmall"
         android:layout_marginEnd="@dimen/margin_padding_small"
+        android:drawablePadding="@dimen/margin_padding_tiny"
         android:ellipsize="end"
+        android:gravity="center"
         android:maxLines="1"
         android:textColor="@color/text_primary"
         android:textSize="@dimen/text_size_normal"
@@ -75,6 +81,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/name"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
         tools:text="@tools:sample/date/day_of_week" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

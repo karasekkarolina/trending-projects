@@ -10,6 +10,7 @@
         <item name="android:textColorPrimary">@color/text_primary</item>
         <item name="android:textColorSecondary">@color/text_secondary</item>
         <item name="android:textColorTertiary">@color/text_tertiary</item>
+        <item name="android:textColorLink">@color/text_primary</item>
         <item name="android:windowBackground">@color/background_primary</item>
         <item name="popupTheme">@style/AppTheme.PopupOverlay</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>

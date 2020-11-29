@@ -5,46 +5,58 @@
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
     android:padding="@dimen/margin_padding_normal">
 
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/full_name"
+        style="@style/TextAppearance.MaterialComponents.Body1.Bold"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_padding_normal"
         android:layout_marginEnd="@dimen/margin_padding_small"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textColor="@color/text_primary"
-        android:textSize="@dimen/text_size_normal"
         app:layout_constraintEnd_toStartOf="@id/avatar"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/lorem" />
 
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/avatar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:contentDescription="@string/avatar"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintBottom_toTopOf="@id/description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/full_name"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-        android:id="@+id/url"
+        android:id="@+id/repository"
+        style="@style/TextAppearance.MaterialComponents.Body1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_padding_normal"
         android:layout_marginTop="@dimen/margin_padding_xsmall"
         android:layout_marginEnd="@dimen/margin_padding_small"
+        android:clickable="true"
         android:ellipsize="end"
+        android:focusable="true"
         android:maxLines="1"
-        android:textColor="@color/text_primary"
-        android:textSize="@dimen/text_size_normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
+        android:paddingTop="@dimen/margin_padding_tiny"
+        android:paddingBottom="@dimen/margin_padding_tiny"
+        app:layout_constraintEnd_toStartOf="@id/avatar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/username"
-        tools:text="@tools:sample/full_names" />
+        app:layout_constraintTop_toBottomOf="@id/full_name"
+        tools:text="@tools:sample/lorem/random" />
 
     <TextView
         android:id="@+id/description"
+        style="@style/TextAppearance.MaterialComponents.Body2.Grey"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_padding_normal"
@@ -52,30 +64,23 @@
         android:layout_marginEnd="@dimen/margin_padding_small"
         android:ellipsize="end"
         android:maxLines="3"
-        android:textColor="@color/text_primary"
-        android:textSize="@dimen/text_size_normal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/url"
+        app:layout_constraintTop_toBottomOf="@id/repository"
         tools:text="@tools:sample/lorem/random" />
 
     <TextView
-        android:id="@+id/avatar"
+        android:id="@+id/sponsor_url"
+        style="@style/TextAppearance.MaterialComponents.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_padding_xsmall"
-        android:layout_marginEnd="@dimen/margin_padding_small"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textColor="@color/text_primary"
-        android:textSize="@dimen/text_size_normal"
-        app:drawableStartCompat="@drawable/ic_star"
-        app:layout_constraintBottom_toTopOf="@id/url"
+        android:layout_marginTop="@dimen/margin_padding_xsmall"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/margin_padding_tiny"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintStart_toEndOf="@id/username"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@tools:sample/date/day_of_week" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/description"
+        tools:text="@tools:sample/full_names" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
