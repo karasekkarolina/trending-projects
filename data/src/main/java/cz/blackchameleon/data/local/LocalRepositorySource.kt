@@ -12,7 +12,7 @@ interface LocalRepositorySource {
 
     suspend fun getRepositories(): List<Repository>?
 
-    suspend fun saveRepositories(repository: Repository)
+    suspend fun saveRepository(repository: Repository)
 
     suspend fun clean()
 }

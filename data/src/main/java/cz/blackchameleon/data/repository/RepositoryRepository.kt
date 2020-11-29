@@ -48,7 +48,7 @@ class RepositoryRepository(
     }
 
     suspend fun saveRepository(repository: Repository) {
-        localRepositorySource.saveRepositories(repository)
+        localRepositorySource.saveRepository(repository)
     }
 
     suspend fun clean() = localRepositorySource.clean()

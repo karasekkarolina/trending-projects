@@ -41,7 +41,7 @@ class DeveloperRepository(
     }
 
     suspend fun saveDeveloper(developer: Developer) {
-        localDeveloperSource.saveDevelopers(developer)
+        localDeveloperSource.saveDeveloper(developer)
     }
 
     suspend fun clean() = localDeveloperSource.clean()

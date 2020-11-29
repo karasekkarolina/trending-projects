@@ -56,7 +56,7 @@ class LocalRepositorySourceImpl(
         return repositories
     }
 
-    override suspend fun saveRepositories(repository: Repository) {
+    override suspend fun saveRepository(repository: Repository) {
         repository.run {
             repositoryDao?.deleteAll()
             repositoryDao?.insert(

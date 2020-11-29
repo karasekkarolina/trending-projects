@@ -10,7 +10,7 @@ import cz.blackchameleon.domain.Developer
 interface LocalDeveloperSource {
     suspend fun getDevelopers(): List<Developer>?
 
-    suspend fun saveDevelopers(developer: Developer)
+    suspend fun saveDeveloper(developer: Developer)
 
     suspend fun clean()
 }

@@ -6,7 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import cz.blackchameleon.domain.Repository
 import cz.blackchameleon.trendingprojects.R
 import cz.blackchameleon.trendingprojects.ui.base.BaseViewModel
+import cz.blackchameleon.usecases.language.GetLanguages
 import cz.blackchameleon.usecases.repository.GetRepositories
+import cz.blackchameleon.usecases.spokenlanguage.GetSpokenLanguages
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,11 +18,15 @@ import kotlinx.coroutines.launch
  * @see BaseViewModel
  *
  * @param getRepositories Use case [GetRepositories]
+ * @param getLanguages Use case [GetLanguages]
+ * @param getSpokenLanguage Use case [GetSpokenLanguages]
  *
  * @author Karolina Klepackova on 27.11.2020.
  */
 class RepositoryViewModel(
-    private val getRepositories: GetRepositories
+    private val getRepositories: GetRepositories,
+    private val getLanguages: GetLanguages,
+    private val getSpokenLanguage: GetSpokenLanguages
 ) : BaseViewModel() {
 
     private val _repositories: MutableLiveData<List<Repository>> = MutableLiveData()

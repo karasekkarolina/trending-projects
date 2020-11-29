@@ -4,12 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import cz.blackchameleon.trendingprojects.framework.database.dao.ContributorDao
-import cz.blackchameleon.trendingprojects.framework.database.dao.DeveloperDao
-import cz.blackchameleon.trendingprojects.framework.database.dao.RepositoryDao
-import cz.blackchameleon.trendingprojects.framework.database.db.ContributorDb
-import cz.blackchameleon.trendingprojects.framework.database.db.DeveloperDb
-import cz.blackchameleon.trendingprojects.framework.database.db.RepositoryDb
+import cz.blackchameleon.trendingprojects.framework.database.dao.*
+import cz.blackchameleon.trendingprojects.framework.database.db.*
 
 /**
  * Room database object with 2 given entities [DeveloperDao], [RepositoryDao]
@@ -20,8 +16,10 @@ import cz.blackchameleon.trendingprojects.framework.database.db.RepositoryDb
     entities = [
         DeveloperDb::class,
         RepositoryDb::class,
-        ContributorDb::class
-    ], exportSchema = false, version = 2
+        ContributorDb::class,
+        LanguageDb::class,
+        SpokenLanguageDb::class
+    ], exportSchema = false, version = 3
 )
 @TypeConverters(DeveloperRepoTypeConverter::class)
 abstract class Database : RoomDatabase() {
@@ -31,6 +29,10 @@ abstract class Database : RoomDatabase() {
     abstract fun repositoryDao(): RepositoryDao
 
     abstract fun contributorDao(): ContributorDao
+
+    abstract fun languageDao(): LanguageDao
+
+    abstract fun spokenLanguageDao(): SpokenLanguageDao
 
     companion object {
         private const val DB_NAME = "database"

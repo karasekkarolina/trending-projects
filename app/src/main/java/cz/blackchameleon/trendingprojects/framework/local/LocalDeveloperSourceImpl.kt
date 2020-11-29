@@ -26,7 +26,7 @@ class LocalDeveloperSourceImpl(
     override suspend fun getDevelopers(): List<Developer>? =
         developerDao?.getDevelopers()?.map { it.toDeveloper() }
 
-    override suspend fun saveDevelopers(developer: Developer) {
+    override suspend fun saveDeveloper(developer: Developer) {
         developer.run {
             developerDao?.insert(
                 DeveloperDb(

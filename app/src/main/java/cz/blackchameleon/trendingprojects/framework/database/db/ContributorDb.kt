@@ -29,7 +29,7 @@ class ContributorDb(
     var href: String,
     @ColumnInfo(name = "avatar")
     var avatar: String,
-    @ColumnInfo(name = "repository_url")
+    @ColumnInfo(name = "repository_url", index = true)
     var repositoryUrl: String
 ) {
     /**

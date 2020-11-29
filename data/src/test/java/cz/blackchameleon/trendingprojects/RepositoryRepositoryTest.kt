@@ -4,6 +4,7 @@ import cz.blackchameleon.data.Result
 import cz.blackchameleon.data.local.LocalRepositorySource
 import cz.blackchameleon.data.remote.RemoteRepositorySource
 import cz.blackchameleon.data.repository.RepositoryRepository
+import cz.blackchameleon.domain.Contributor
 import cz.blackchameleon.domain.Repository
 import io.reactivex.rxjava3.core.Single
 import kotlinx.coroutines.runBlocking
@@ -31,13 +32,39 @@ class RepositoryRepositoryTest {
     private lateinit var repositoryRepository: RepositoryRepository
 
     private val firstRepository = Repository(
-        id = "firstItem",
-        name = "firstRepository"
+        author = "firstAuthor",
+        name = "firstName",
+        avatar = "firstAvatar",
+        url = "firstUrl",
+        description = "firstDescription",
+        language = "firstLanguage",
+        languageColor = "firstLanguageColor",
+        stars = "firstStars",
+        forks = "firstForks",
+        currentPeriodStars = "firstCurrentPeriodStars",
+        builtBy = listOf(
+            Contributor(
+                "firstUsername", "firstHref", "firstAvatar"
+            )
+        )
     )
 
     private val secondRepository = Repository(
-        id = "secondItem",
-        name = "secondRepository"
+        author = "secondAuthor",
+        name = "secondName",
+        avatar = "secondAvatar",
+        url = "secondUrl",
+        description = "secondDescription",
+        language = "secondLanguage",
+        languageColor = "secondLanguageColor",
+        stars = "secondStars",
+        forks = "secondForks",
+        currentPeriodStars = "secondCurrentPeriodStars",
+        builtBy = listOf(
+            Contributor(
+                "secondUsername", "secondHref", "secondAvatar"
+            )
+        )
     )
 
     @Before
@@ -57,7 +84,7 @@ class RepositoryRepositoryTest {
     fun `pass when repository is saved`() {
         runBlocking {
             repositoryRepository.saveRepository(firstRepository)
-            verify(localRepositorySource, times(1)).saveRepositories(firstRepository)
+            verify(localRepositorySource, times(1)).saveRepository(firstRepository)
         }
     }
 
@@ -65,14 +92,19 @@ class RepositoryRepositoryTest {
     fun `pass when repositories are saved`() {
         runBlocking {
             repositoryRepository.saveRepositories(listOf(firstRepository, firstRepository))
-            verify(localRepositorySource, times(2)).saveRepositories(firstRepository)
+            verify(localRepositorySource, times(2)).saveRepository(firstRepository)
         }
     }
 
     @Test
     fun `pass when repositories are loaded from database`() {
         runBlocking {
-            `when`(localRepositorySource.getRepositories()).thenReturn(listOf(firstRepository, secondRepository))
+            `when`(localRepositorySource.getRepositories()).thenReturn(
+                listOf(
+                    firstRepository,
+                    secondRepository
+                )
+            )
 
             val cartItems = repositoryRepository.getRepositories()
             assert(

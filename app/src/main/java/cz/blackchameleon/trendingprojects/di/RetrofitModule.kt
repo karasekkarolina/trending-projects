@@ -2,7 +2,9 @@ package cz.blackchameleon.trendingprojects.di
 
 import cz.blackchameleon.trendingprojects.UrlConst.BASE_URL
 import cz.blackchameleon.trendingprojects.framework.DeveloperApi
+import cz.blackchameleon.trendingprojects.framework.LanguageApi
 import cz.blackchameleon.trendingprojects.framework.RepositoryApi
+import cz.blackchameleon.trendingprojects.framework.SpokenLanguageApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
@@ -22,6 +24,8 @@ val retrofitModule = module {
 
     single { provideRetrofitService<DeveloperApi>(get()) }
     single { provideRetrofitService<RepositoryApi>(get()) }
+    single { provideRetrofitService<LanguageApi>(get()) }
+    single { provideRetrofitService<SpokenLanguageApi>(get()) }
 }
 
 // Creates new Okhttp client for API calls

@@ -11,5 +11,5 @@
     <color name="background_primary">#FFF</color>
     <color name="background_placeholder">#999FA5</color>
     <color name="placeholder_stroke">#2D3032</color>
-    <color name="overlay">#A3A3A3</color>
+    <color name="overlay">#EAEAEA</color>
 </resources>
