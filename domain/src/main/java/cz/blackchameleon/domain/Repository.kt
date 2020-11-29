@@ -1,5 +1,7 @@
 package cz.blackchameleon.domain
 
+import java.io.Serializable
+
 /**
  * Representation of repository entity
  *
@@ -17,4 +19,4 @@ data class Repository(
     val forks: String,
     val currentPeriodStars: String,
     var builtBy: List<Contributor> = emptyList()
-)
+): Serializable

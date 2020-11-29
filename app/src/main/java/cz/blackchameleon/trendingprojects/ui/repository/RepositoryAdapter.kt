@@ -37,7 +37,11 @@ class RepositoryAdapter(
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(item: Repository) {
             itemView.apply {
+
                 name.text = item.name
+                author.text = item.author
+                description.text = item.description
+                current_period_stars.text = item.currentPeriodStars
                 main_content.setOnClickListener { clickListener(item) }
             }
         }

@@ -4,10 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import cz.blackchameleon.trendingprojects.R
 
 /**
@@ -31,13 +27,5 @@ abstract class BaseFragment(layout: Int) : Fragment(layout) {
                     .show()
             }
         })
-    }
-
-    fun initRecycler(recyclerView: RecyclerView, adapter: ListAdapter<Any, RecyclerView.ViewHolder>) {
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.addItemDecoration(
-            DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-        )
     }
 }

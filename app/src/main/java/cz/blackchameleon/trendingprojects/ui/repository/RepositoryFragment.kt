@@ -3,8 +3,8 @@ package cz.blackchameleon.trendingprojects.ui.repository
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import cz.blackchameleon.trendingprojects.R
 import cz.blackchameleon.trendingprojects.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_repository.*
@@ -27,7 +27,13 @@ class RepositoryFragment : BaseFragment(R.layout.fragment_repository) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initRecycler(repository_list, repositoryAdapter as ListAdapter<Any, RecyclerView.ViewHolder>)
+        repository_list.apply {
+            adapter = repositoryAdapter
+            layoutManager = LinearLayoutManager(activity)
+            addItemDecoration(
+                DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+            )
+        }
         initObservers()
         setupListeners()
     }
