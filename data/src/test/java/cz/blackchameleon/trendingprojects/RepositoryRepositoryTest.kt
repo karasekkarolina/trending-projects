@@ -14,7 +14,6 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
-import java.lang.RuntimeException
 
 /**
  * Test class for repository repository logic
@@ -106,9 +105,9 @@ class RepositoryRepositoryTest {
                 )
             )
 
-            val cartItems = repositoryRepository.getRepositories(true)
+            val repositories = repositoryRepository.getRepositories(false)
             assert(
-                cartItems is Result.Success && cartItems.data == listOf(
+                repositories is Result.Success && repositories.data == listOf(
                     firstRepository,
                     secondRepository
                 )
@@ -123,9 +122,9 @@ class RepositoryRepositoryTest {
                 .`when`(remoteRepositorySource)
                 .fetchRepositories()
 
-            val cartItems = repositoryRepository.getRepositories(true)
+            val repositories = repositoryRepository.getRepositories(true)
             assert(
-                cartItems is Result.Success && cartItems.data == listOf(
+                repositories is Result.Success && repositories.data == listOf(
                     firstRepository,
                     secondRepository
                 )
