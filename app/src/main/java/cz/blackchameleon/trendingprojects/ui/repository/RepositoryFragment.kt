@@ -49,9 +49,11 @@ class RepositoryFragment : BaseFragment(R.layout.fragment_repository) {
             repository_list,
             repositoryAdapter as ListAdapter<Any, RecyclerView.ViewHolder>
         )
-        language.text = viewModel.language?.name ?: resources.getString(R.string.filter_any_language)
+        language.text =
+            viewModel.language?.name ?: resources.getString(R.string.filter_any_language)
         spoken_language.text =
-            viewModel.spokenLanguage?.name ?: resources.getString(R.string.filter_any_spoken_language)
+            viewModel.spokenLanguage?.name
+                ?: resources.getString(R.string.filter_any_spoken_language)
         date_range.text = resources.getString(R.string.filter_today)
     }
 
@@ -75,15 +77,22 @@ class RepositoryFragment : BaseFragment(R.layout.fragment_repository) {
             ) { filter ->
                 when (viewModel.currentFilterType) {
                     FilterViewModel.FilterType.LANGUAGE -> {
-                        viewModel.language = filter
-                        language.text = filter.name
+                        if (viewModel.language != filter) {
+                            viewModel.language = filter
+                            language.text = filter.name
+                            viewModel.initData(true)
+                            swipe_layout.isRefreshing = true
+                        }
                     }
                     FilterViewModel.FilterType.SPOKEN_LANGUAGE -> {
-                        viewModel.spokenLanguage = filter
-                        spoken_language.text = filter.name
+                        if (viewModel.spokenLanguage != filter) {
+                            viewModel.spokenLanguage = filter
+                            spoken_language.text = filter.name
+                            viewModel.initData(true)
+                            swipe_layout.isRefreshing = true
+                        }
                     }
                 }
-                viewModel.initData(true)
             }
     }
 
@@ -108,6 +117,7 @@ class RepositoryFragment : BaseFragment(R.layout.fragment_repository) {
                             date_range.text = resources.getString(R.string.filter_monthly)
                         }
                     }
+                    swipe_layout.isRefreshing = true
                     true
                 }
             }.show()
