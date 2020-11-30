@@ -11,10 +11,9 @@
         style="@style/TextAppearance.MaterialComponents.Body1.Bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_padding_normal"
-        android:layout_marginEnd="@dimen/margin_padding_small"
         android:ellipsize="end"
         android:maxLines="1"
+        android:padding="@dimen/margin_padding_normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/lorem" />

@@ -33,6 +33,7 @@
     <string name="filter_weekly">This week</string>
     <string name="filter_monthly">This month</string>
     <string name="title_filter_fragment">Filter fragment</string>
-    <string name="filter_any">Any</string>
+    <string name="filter_any_language">Any language</string>
+    <string name="filter_any_spoken_language">Any spoken language</string>
 
 </resources>

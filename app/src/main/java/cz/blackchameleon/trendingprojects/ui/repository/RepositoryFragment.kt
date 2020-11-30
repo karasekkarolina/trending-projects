@@ -49,9 +49,9 @@ class RepositoryFragment : BaseFragment(R.layout.fragment_repository) {
             repository_list,
             repositoryAdapter as ListAdapter<Any, RecyclerView.ViewHolder>
         )
-        language.text = viewModel.language?.name ?: resources.getString(R.string.filter_any)
+        language.text = viewModel.language?.name ?: resources.getString(R.string.filter_any_language)
         spoken_language.text =
-            viewModel.spokenLanguage?.name ?: resources.getString(R.string.filter_any)
+            viewModel.spokenLanguage?.name ?: resources.getString(R.string.filter_any_spoken_language)
         date_range.text = resources.getString(R.string.filter_today)
     }
 

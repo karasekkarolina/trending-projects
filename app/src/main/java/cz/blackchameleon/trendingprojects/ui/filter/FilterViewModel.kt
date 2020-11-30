@@ -24,6 +24,9 @@ class FilterViewModel(
     private val _filters: MutableLiveData<List<Filter>> = MutableLiveData()
     val filters: LiveData<List<Filter>> = _filters
 
+    private val _searchedFilters: MutableLiveData<List<Filter>> = MutableLiveData()
+    val searchedFilters: LiveData<List<Filter>> = _searchedFilters
+
     init {
         initData(false)
     }
@@ -59,6 +62,17 @@ class FilterViewModel(
                 }
             }
         }
+    }
+
+    fun onSearchInputChanged(string: String) {
+        val searchedFilters: MutableList<Filter> = mutableListOf()
+
+        searchedFilters.run {
+            _filters.value?.forEach {
+                if (it.name.contains(string)) add(it)
+            }
+        }
+        _searchedFilters.postValue(searchedFilters)
     }
 
     enum class FilterType {

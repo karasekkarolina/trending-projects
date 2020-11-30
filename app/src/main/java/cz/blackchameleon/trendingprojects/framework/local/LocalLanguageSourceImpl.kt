@@ -30,7 +30,7 @@ class LocalLanguageSourceImpl(
         language.run {
             languageDao?.insert(
                 LanguageDb(
-                    urlParam, name
+                    urlParam ?: "", name
                 )
             )
         }

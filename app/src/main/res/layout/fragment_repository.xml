@@ -27,6 +27,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_padding_small"
+                app:icon="@drawable/ic_arrow_down"
+                android:layout_gravity="center_vertical"
                 tools:text="@tools:sample/date/day_of_week" />
 
             <com.google.android.material.button.MaterialButton

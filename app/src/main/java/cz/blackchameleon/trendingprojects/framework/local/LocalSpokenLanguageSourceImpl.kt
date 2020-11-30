@@ -30,7 +30,7 @@ class LocalSpokenLanguageSourceImpl(
         spokenLanguage.run {
             spokenLanguageDao?.insert(
                 SpokenLanguageDb(
-                    urlParam, name
+                    urlParam ?: "", name
                 )
             )
         }

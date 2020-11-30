@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
     <style name="Widget.TrendingProjects.AlertDialog" parent="Theme.MaterialComponents.Light.Dialog.Alert">
         <item name="android:textColor">@color/text_secondary</item>
         <item name="android:textColorPrimary">@color/text_primary</item>
-        <item name="buttonBarNegativeButtonStyle">@style/Widget.TrendingProjects.NegativeButton</item>
-        <item name="buttonBarNeutralButtonStyle">@style/Widget.TrendingProjects.PositiveButton</item>
-        <item name="buttonBarPositiveButtonStyle">@style/Widget.TrendingProjects.PositiveButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.TrendingProjects.NegativeButton
+        </item>
+        <item name="buttonBarNeutralButtonStyle">@style/Widget.TrendingProjects.PositiveButton
+        </item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.TrendingProjects.PositiveButton
+        </item>
         <item name="android:colorAccent" tools:targetApi="lollipop">@color/text_primary
         </item>
     </style>
@@ -33,6 +37,14 @@
         <item name="android:paddingEnd">@dimen/margin_padding_normal</item>
     </style>
 
+    <style name="Theme.TrendingProjects.SearchView">
+        <item name="android:background">@drawable/round_input</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="queryBackground">@android:color/transparent</item>
+        <item name="queryHint">@string/search</item>
+    </style>
+
     <style name="TextAppearance.MaterialComponents.Body1.Bold">
         <item name="android:textStyle">bold</item>
     </style>
@@ -53,4 +65,5 @@
         <item name="android:textColor">@color/text_tertiary</item>
     </style>
 
+    <string name="search">Search</string>
 </resources>
