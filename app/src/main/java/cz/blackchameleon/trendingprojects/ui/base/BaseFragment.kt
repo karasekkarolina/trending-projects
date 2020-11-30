@@ -26,7 +26,7 @@ abstract class BaseFragment(layout: Int) : Fragment(layout) {
             context?.let { context ->
                 AlertDialog.Builder(context, R.style.Widget_TrendingProjects_AlertDialog)
                     .setTitle(R.string.error_occurred)
-                    .setMessage(error)
+                    .setMessage(error.getContentIfNotHandled() ?: R.string.error_occurred)
                     .setPositiveButton(android.R.string.ok) { _, _ ->
                         viewModel.showEmptyState()
                     }

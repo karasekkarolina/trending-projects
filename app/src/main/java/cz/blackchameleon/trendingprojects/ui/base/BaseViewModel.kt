@@ -3,6 +3,7 @@ package cz.blackchameleon.trendingprojects.ui.base
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import cz.blackchameleon.trendingprojects.extensions.Event
 
 /**
  * Base view model class that provides common functionality of view models
@@ -10,11 +11,11 @@ import androidx.lifecycle.ViewModel
  * @author Karolina Klepackova on 27.11.2020.
  */
 abstract class BaseViewModel : ViewModel() {
-    protected val _showError: MutableLiveData<Int> = MutableLiveData()
-    val showError: LiveData<Int> = _showError
+    protected val _showError: MutableLiveData<Event<Int>> = MutableLiveData()
+    val showError: LiveData<Event<Int>> = _showError
 
-    private val _showEmptyState: MutableLiveData<Unit> = MutableLiveData()
-    val showEmptyState: LiveData<Unit> = _showEmptyState
+    private val _showEmptyState: MutableLiveData<Event<Unit>> = MutableLiveData()
+    val showEmptyState: LiveData<Event<Unit>> = _showEmptyState
 
     // Provides view model data initialization
     abstract fun initData(force: Boolean)
@@ -24,6 +25,6 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     fun showEmptyState() {
-        _showEmptyState.postValue(Unit)
+        _showEmptyState.postValue(Event(Unit))
     }
 }

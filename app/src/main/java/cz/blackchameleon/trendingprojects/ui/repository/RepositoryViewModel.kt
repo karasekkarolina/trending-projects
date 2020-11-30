@@ -8,6 +8,7 @@ import cz.blackchameleon.domain.Language
 import cz.blackchameleon.domain.Repository
 import cz.blackchameleon.domain.SpokenLanguage
 import cz.blackchameleon.trendingprojects.R
+import cz.blackchameleon.trendingprojects.extensions.Event
 import cz.blackchameleon.trendingprojects.ui.base.BaseViewModel
 import cz.blackchameleon.trendingprojects.ui.filter.FilterViewModel
 import cz.blackchameleon.usecases.repository.GetRepositories
@@ -47,7 +48,7 @@ class RepositoryViewModel(
                         _repositories.postValue(it.data)
                     }
                     is Result.Error -> {
-                        _showError.postValue(R.string.repository_list_loading_failed)
+                        _showError.postValue(Event(R.string.repository_list_loading_failed))
                     }
                 }
             }

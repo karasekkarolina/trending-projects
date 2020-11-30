@@ -20,7 +20,7 @@ import org.mockito.junit.MockitoJUnitRunner
  * @author Karolina Klepackova on 30.11.2020.
  */
 @RunWith(MockitoJUnitRunner::class)
-class SpokenSpokenLanguageRepositoryTest {
+class SpokenLanguageRepositoryTest {
     @Mock
     lateinit var localSpokenLanguageSource: LocalSpokenLanguageSource
 

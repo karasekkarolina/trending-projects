@@ -10,9 +10,9 @@
         style="@style/Theme.TrendingProjects.SearchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_padding_tiny"
+        android:layout_marginStart="@dimen/margin_padding_xsmall"
         android:layout_marginTop="@dimen/margin_padding_xsmall"
-        android:layout_marginEnd="@dimen/margin_padding_tiny"
+        android:layout_marginEnd="@dimen/margin_padding_xsmall"
         android:elevation="1dp"
         app:iconifiedByDefault="false"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,4 +25,27 @@
         android:paddingTop="@dimen/margin_padding_xsmall"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_view" />
+
+    <TextView
+        android:id="@+id/no_data_text"
+        style="@style/TextAppearance.MaterialComponents.Body1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/no_data_found"
+        android:textAlignment="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/overlay"
+        layout="@layout/loading_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 </androidx.constraintlayout.widget.ConstraintLayout>

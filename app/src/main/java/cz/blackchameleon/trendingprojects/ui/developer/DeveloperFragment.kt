@@ -38,7 +38,7 @@ class DeveloperFragment : BaseFragment(R.layout.fragment_developer) {
             setLoadingVisibility(false)
         })
         viewModel.showEmptyState.observe(viewLifecycleOwner, {
-            no_data_text.isVisible = true
+            no_data_text.isVisible =  viewModel.developers.value?.isEmpty() ?: true
             setLoadingVisibility(false)
         })
     }

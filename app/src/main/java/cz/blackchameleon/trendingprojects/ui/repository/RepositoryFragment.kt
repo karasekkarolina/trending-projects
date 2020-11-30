@@ -68,7 +68,7 @@ class RepositoryFragment : BaseFragment(R.layout.fragment_repository) {
             setLoadingVisibility(false)
         })
         viewModel.showEmptyState.observe(viewLifecycleOwner, {
-            no_data_text.isVisible = true
+            no_data_text.isVisible = viewModel.repositories.value?.isEmpty() ?: true
             setLoadingVisibility(false)
         })
         findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<Filter>("filter")
@@ -79,7 +79,7 @@ class RepositoryFragment : BaseFragment(R.layout.fragment_repository) {
                     FilterViewModel.FilterType.LANGUAGE -> {
                         if (viewModel.language != filter) {
                             viewModel.language = filter
-                            language.text = filter.name
+                            language.text = filter?.name ?: resources.getString(R.string.filter_any_language)
                             viewModel.initData(true)
                             swipe_layout.isRefreshing = true
                         }
@@ -87,7 +87,7 @@ class RepositoryFragment : BaseFragment(R.layout.fragment_repository) {
                     FilterViewModel.FilterType.SPOKEN_LANGUAGE -> {
                         if (viewModel.spokenLanguage != filter) {
                             viewModel.spokenLanguage = filter
-                            spoken_language.text = filter.name
+                            spoken_language.text = filter?.name ?: resources.getString(R.string.filter_any_spoken_language)
                             viewModel.initData(true)
                             swipe_layout.isRefreshing = true
                         }

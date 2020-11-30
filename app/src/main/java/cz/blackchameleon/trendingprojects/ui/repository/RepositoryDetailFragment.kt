@@ -74,7 +74,7 @@ class RepositoryDetailFragment : BaseFragment(R.layout.fragment_repository_detai
             setLoadingVisibility(false)
         })
         viewModel.showEmptyState.observe(viewLifecycleOwner, {
-            no_data_text.isVisible = true
+            no_data_text.isVisible = viewModel.repository.value == null
             setLoadingVisibility(false)
         })
     }

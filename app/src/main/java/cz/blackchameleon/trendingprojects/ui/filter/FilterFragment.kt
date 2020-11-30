@@ -2,6 +2,7 @@ package cz.blackchameleon.trendingprojects.ui.filter
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ListAdapter
@@ -48,6 +49,8 @@ class FilterFragment : BaseFragment(R.layout.fragment_filter) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        findNavController().previousBackStackEntry?.savedStateHandle?.set("filter", null)
+
         initRecycler(
             filter_list,
             filterAdapter as ListAdapter<Any, RecyclerView.ViewHolder>
@@ -75,6 +78,10 @@ class FilterFragment : BaseFragment(R.layout.fragment_filter) {
             }
             val initializedList: List<Filter> = listOf(Filter(null, primalValue))
             filterAdapter.submitList(initializedList + it)
+        })
+        viewModel.showEmptyState.observe(viewLifecycleOwner, {
+            no_data_text.isVisible = viewModel.filters.value?.isEmpty() ?: true
+            overlay.isVisible = false
         })
     }
 }

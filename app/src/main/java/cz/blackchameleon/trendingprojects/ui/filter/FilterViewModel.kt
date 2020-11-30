@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import cz.blackchameleon.data.Result
 import cz.blackchameleon.domain.Filter
 import cz.blackchameleon.trendingprojects.R
+import cz.blackchameleon.trendingprojects.extensions.Event
 import cz.blackchameleon.trendingprojects.ui.base.BaseViewModel
 import cz.blackchameleon.usecases.language.GetLanguages
 import cz.blackchameleon.usecases.spokenlanguage.GetSpokenLanguages
@@ -48,7 +49,7 @@ class FilterViewModel(
                                 _filters.postValue(it.data)
                             }
                             is Result.Error -> {
-                                _showError.postValue(R.string.developer_list_loading_failed)
+                                _showError.postValue(Event(R.string.developer_list_loading_failed))
                             }
                         }
                     }
@@ -60,7 +61,7 @@ class FilterViewModel(
                                 _filters.postValue(it.data)
                             }
                             is Result.Error -> {
-                                _showError.postValue(R.string.developer_list_loading_failed)
+                                _showError.postValue(Event(R.string.developer_list_loading_failed))
                             }
                         }
                     }
