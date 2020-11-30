@@ -1,6 +1,6 @@
 package cz.blackchameleon.trendingprojects.ui.repository
 
-import android.graphics.*
+import android.graphics.Color
 import android.text.Spannable
 import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import cz.blackchameleon.domain.DateRange
 import cz.blackchameleon.domain.Repository
 import cz.blackchameleon.trendingprojects.R
 import kotlinx.android.synthetic.main.item_repository.view.*
@@ -29,6 +30,8 @@ class RepositoryAdapter(
             oldItem == newItem
     }) {
 
+    var period: DateRange = DateRange.DAILY
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
@@ -45,30 +48,41 @@ class RepositoryAdapter(
                 name.apply {
                     text = (HtmlCompat.fromHtml(
                         resources.getString(
-                            R.string.author_repo_name,
+                            if (item.name.isBlank()) R.string.author_name else R.string.author_repo_name,
                             item.author,
                             item.url,
                             item.name
                         ), HtmlCompat.FROM_HTML_MODE_LEGACY
                     ) as Spannable)
+                    viewTreeObserver.apply {
+                        addOnGlobalLayoutListener {
+                            itemView.name?.let {
+                                if (it.lineCount > it.maxLines) {
+                                    val endOfLastLine = it.layout.getLineEnd(0)
+                                    text = "${it.text.subSequence(0, endOfLastLine)} ..."
+                                }
+                            }
+                        }
+                        removeOnGlobalLayoutListener {}
+                    }
                     movementMethod = LinkMovementMethod.getInstance()
                 }
                 description.text = item.description
-                val periodInt = 1
-                val period = when (periodInt) {
-                    1 -> resources.getString(R.string.today)
-                    2 -> resources.getString(R.string.weekly)
-                    3 -> resources.getString(R.string.monthly)
-                    else -> resources.getString(R.string.today)
+                val periodText = when (period) {
+                    DateRange.DAILY -> resources.getString(R.string.today)
+                    DateRange.WEEKLY -> resources.getString(R.string.weekly)
+                    DateRange.MONTHLY -> resources.getString(R.string.monthly)
                 }
-                current_period_stars.text = resources.getString(R.string.current_stars, item.currentPeriodStars, period)
+                current_period_stars.text =
+                    resources.getString(R.string.current_stars, item.currentPeriodStars, periodText)
                 overall_stars.text = resources.getString(R.string.overall_stars, item.stars)
-                val color = if (item.languageColor.isBlank() || item.languageColor.isEmpty()) {
-                    Color.TRANSPARENT
-                } else {
-                    Color.parseColor(item.languageColor)
-                }
-                language_color.background.setTint(color)
+                language_color.background.setTint(
+                    if (item.languageColor.isBlank() || item.languageColor.isEmpty()) {
+                        Color.TRANSPARENT
+                    } else {
+                        Color.parseColor(item.languageColor)
+                    }
+                )
                 language.text = item.language
                 main_content.setOnClickListener { clickListener(item) }
             }

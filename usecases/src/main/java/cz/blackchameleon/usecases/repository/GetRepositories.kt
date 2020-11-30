@@ -1,8 +1,11 @@
 package cz.blackchameleon.usecases.repository
 
-import cz.blackchameleon.data.repository.RepositoryRepository
-import cz.blackchameleon.domain.Repository
 import cz.blackchameleon.data.Result
+import cz.blackchameleon.data.repository.RepositoryRepository
+import cz.blackchameleon.domain.DateRange
+import cz.blackchameleon.domain.Language
+import cz.blackchameleon.domain.Repository
+import cz.blackchameleon.domain.SpokenLanguage
 
 /**
  * Use case that returns repository data
@@ -13,6 +16,11 @@ import cz.blackchameleon.data.Result
 class GetRepositories(
     private val repositoryRepository: RepositoryRepository
 ) {
-    suspend operator fun invoke(force: Boolean): Result<List<Repository>> =
-        repositoryRepository.getRepositories(force)
+    suspend operator fun invoke(
+        force: Boolean,
+        dateRange: DateRange?,
+        language: Language?,
+        spokenLanguage: SpokenLanguage?
+    ): Result<List<Repository>> =
+        repositoryRepository.getRepositories(force, dateRange, language, spokenLanguage)
 }

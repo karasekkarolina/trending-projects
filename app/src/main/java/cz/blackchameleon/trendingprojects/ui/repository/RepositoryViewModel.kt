@@ -3,9 +3,13 @@ package cz.blackchameleon.trendingprojects.ui.repository
 import cz.blackchameleon.data.Result
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import cz.blackchameleon.domain.DateRange
+import cz.blackchameleon.domain.Language
 import cz.blackchameleon.domain.Repository
+import cz.blackchameleon.domain.SpokenLanguage
 import cz.blackchameleon.trendingprojects.R
 import cz.blackchameleon.trendingprojects.ui.base.BaseViewModel
+import cz.blackchameleon.trendingprojects.ui.filter.FilterViewModel
 import cz.blackchameleon.usecases.language.GetLanguages
 import cz.blackchameleon.usecases.repository.GetRepositories
 import cz.blackchameleon.usecases.spokenlanguage.GetSpokenLanguages
@@ -32,13 +36,18 @@ class RepositoryViewModel(
     private val _repositories: MutableLiveData<List<Repository>> = MutableLiveData()
     val repositories: LiveData<List<Repository>> = _repositories
 
+    var currentFilterType: FilterViewModel.FilterType = FilterViewModel.FilterType.LANGUAGE
+    var dateRange: DateRange = DateRange.DAILY
+    var language: Language? = null
+    var spokenLanguage: SpokenLanguage? = null
+
     init {
         initData(false)
     }
 
     override fun initData(force: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
-            getRepositories(force).let {
+            getRepositories(force, dateRange, language, spokenLanguage).let {
                 when (it) {
                     is Result.Success -> {
                         _repositories.postValue(it.data)
@@ -49,5 +58,20 @@ class RepositoryViewModel(
                 }
             }
         }
+    }
+
+    fun onDailyFilterClicked() {
+        dateRange = DateRange.DAILY
+        initData(true)
+    }
+
+    fun onWeeklyFilterClicked() {
+        dateRange = DateRange.WEEKLY
+        initData(true)
+    }
+
+    fun onMonthlyFilterClicked() {
+        dateRange = DateRange.MONTHLY
+        initData(true)
     }
 }

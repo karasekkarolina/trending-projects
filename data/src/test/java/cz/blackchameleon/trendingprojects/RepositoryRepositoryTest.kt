@@ -106,7 +106,7 @@ class RepositoryRepositoryTest {
                 )
             )
 
-            val cartItems = repositoryRepository.getRepositories()
+            val cartItems = repositoryRepository.getRepositories(true)
             assert(
                 cartItems is Result.Success && cartItems.data == listOf(
                     firstRepository,
@@ -123,7 +123,7 @@ class RepositoryRepositoryTest {
                 .`when`(remoteRepositorySource)
                 .fetchRepositories()
 
-            val cartItems = repositoryRepository.getRepositories()
+            val cartItems = repositoryRepository.getRepositories(true)
             assert(
                 cartItems is Result.Success && cartItems.data == listOf(
                     firstRepository,
@@ -142,7 +142,7 @@ class RepositoryRepositoryTest {
                 .`when`(remoteRepositorySource)
                 .fetchRepositories()
 
-            val repositories = repositoryRepository.getRepositories()
+            val repositories = repositoryRepository.getRepositories(true)
             assert(repositories is Result.Error)
         }
     }

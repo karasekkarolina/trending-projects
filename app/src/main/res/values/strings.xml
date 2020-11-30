@@ -12,6 +12,7 @@
     <string name="current_stars">%1$s %2$s</string>
     <string name="overall_stars">Overall stars: %s</string>
     <string name="author_repo_name"><![CDATA[%1$s / <a href="%2$s">%3$s</a>]]></string>
+    <string name="author_name">%1$s</string>
     <string name="today">today</string>
     <string name="weekly">weekly</string>
     <string name="monthly">monthly</string>
@@ -26,5 +27,12 @@
     <string name="url"><![CDATA[%1$s (<a href="%2$s">%3$s</a>)]]></string>
     <string name="sponsor_url"><![CDATA[<a href="%1$s">Donate</a>]]></string>
     <string name="repository_url"><![CDATA[<a href="%1$s">%2$s</a>]]></string>
+
+    <!-- Filters -->
+    <string name="filter_today">Today</string>
+    <string name="filter_weekly">This week</string>
+    <string name="filter_monthly">This month</string>
+    <string name="title_filter_fragment">Filter fragment</string>
+    <string name="filter_any">Any</string>
 
 </resources>

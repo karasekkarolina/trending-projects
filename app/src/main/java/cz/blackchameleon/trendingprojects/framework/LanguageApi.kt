@@ -10,6 +10,6 @@ import retrofit2.http.GET
  * @author Karolina Klepackova on 29.11.2020.
  */
 interface LanguageApi {
-    @GET("/language")
+    @GET("/languages")
     fun getLanguages(): Single<List<LanguageMo>>
 }

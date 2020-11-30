@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/mobile_navigation"
-        app:startDestination="@+id/navigation_repository">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_repository">
 
     <fragment
-            android:id="@+id/navigation_repository"
-            android:name="cz.blackchameleon.trendingprojects.ui.repository.RepositoryFragment"
-            android:label="@string/title_repositories"
-            tools:layout="@layout/fragment_repository" />
+        android:id="@+id/navigation_repository"
+        android:name="cz.blackchameleon.trendingprojects.ui.repository.RepositoryFragment"
+        android:label="@string/title_repositories"
+        tools:layout="@layout/fragment_repository" />
 
     <fragment
-            android:id="@+id/navigation_developer"
-            android:name="cz.blackchameleon.trendingprojects.ui.developer.DeveloperFragment"
-            android:label="@string/title_developers"
-            tools:layout="@layout/fragment_developer" />
+        android:id="@+id/navigation_developer"
+        android:name="cz.blackchameleon.trendingprojects.ui.developer.DeveloperFragment"
+        android:label="@string/title_developers"
+        tools:layout="@layout/fragment_developer" />
 
     <action
         android:id="@+id/action_repository_detail_fragment"
@@ -30,5 +30,19 @@
             android:name="repository"
             app:argType="cz.blackchameleon.domain.Repository"
             app:nullable="true" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_filter_fragment"
+        app:destination="@+id/navigation_filter_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_filter_fragment"
+        android:name="cz.blackchameleon.trendingprojects.ui.filter.FilterFragment"
+        android:label="@string/title_filter_fragment"
+        tools:layout="@layout/fragment_filter">
+        <argument
+            android:name="filter"
+            app:argType="cz.blackchameleon.trendingprojects.ui.filter.FilterViewModel$FilterType" />
     </fragment>
 </navigation>

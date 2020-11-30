@@ -3,9 +3,11 @@ package cz.blackchameleon.data.repository
 import cz.blackchameleon.data.Result
 import cz.blackchameleon.data.local.LocalRepositorySource
 import cz.blackchameleon.data.remote.RemoteRepositorySource
+import cz.blackchameleon.domain.DateRange
+import cz.blackchameleon.domain.Language
 import cz.blackchameleon.domain.Repository
+import cz.blackchameleon.domain.SpokenLanguage
 import kotlinx.coroutines.withContext
-import java.lang.RuntimeException
 import kotlin.coroutines.coroutineContext
 
 /**
@@ -24,16 +26,23 @@ class RepositoryRepository(
             } ?: Result.Error("Repository not found")
         }
 
-    suspend fun getRepositories(force: Boolean): Result<List<Repository>> =
+    suspend fun getRepositories(
+        force: Boolean,
+        dateRange: DateRange? = null,
+        language: Language? = null,
+        spokenLanguage: SpokenLanguage? = null
+    ): Result<List<Repository>> =
         withContext(coroutineContext) {
             localRepositorySource.getRepositories()?.let {
                 if (it.isNotEmpty() && !force) {
-                   return@withContext Result.Success(it)
+                    return@withContext Result.Success(it)
                 }
             }
 
             try {
-                val repositories = remoteRepositorySource.fetchRepositories().blockingGet()
+                val repositories =
+                    remoteRepositorySource.fetchRepositories(dateRange, language, spokenLanguage)
+                        .blockingGet()
                 if (force) {
                     localRepositorySource.clean()
                 }

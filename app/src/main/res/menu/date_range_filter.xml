@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/daily"
+        android:title="@string/filter_today"/>
+    <item
+        android:id="@+id/weekly"
+        android:title="@string/filter_weekly"/>
+    <item
+        android:id="@+id/monthly"
+        android:title="@string/filter_monthly"/>
+</menu>
