@@ -31,10 +31,16 @@ class RepositoryViewModel(
     private val _repositories: MutableLiveData<List<Repository>> = MutableLiveData()
     val repositories: LiveData<List<Repository>> = _repositories
 
-    var currentFilterType: FilterViewModel.FilterType = FilterViewModel.FilterType.LANGUAGE
-    var dateRange: DateRange = DateRange.DAILY
-    var language: Language? = null
-    var spokenLanguage: SpokenLanguage? = null
+    private val _dateRange: MutableLiveData<DateRange> = MutableLiveData()
+    val dateRange: LiveData<DateRange> = _dateRange
+
+    private val _language: MutableLiveData<Language?> = MutableLiveData()
+    val language: LiveData<Language?> = _language
+
+    private val _spokenLanguage: MutableLiveData<SpokenLanguage?> = MutableLiveData()
+    val spokenLanguage: LiveData<SpokenLanguage?> = _spokenLanguage
+
+    var currentFilterType: FilterViewModel.FilterType? = null
 
     init {
         initData(false)
@@ -42,7 +48,7 @@ class RepositoryViewModel(
 
     override fun initData(force: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
-            getRepositories(force, dateRange, language, spokenLanguage).let {
+            getRepositories(force, dateRange.value, language.value, spokenLanguage.value).let {
                 when (it) {
                     is Result.Success -> {
                         _repositories.postValue(it.data)
@@ -56,17 +62,25 @@ class RepositoryViewModel(
     }
 
     fun onDailyFilterClicked() {
-        dateRange = DateRange.DAILY
+        _dateRange.postValue(DateRange.DAILY)
         initData(true)
     }
 
     fun onWeeklyFilterClicked() {
-        dateRange = DateRange.WEEKLY
+        _dateRange.postValue(DateRange.MONTHLY)
         initData(true)
     }
 
     fun onMonthlyFilterClicked() {
-        dateRange = DateRange.MONTHLY
+        _dateRange.postValue(DateRange.MONTHLY)
         initData(true)
+    }
+
+    fun onLanguageChanged(language: Language?) {
+        _language.postValue(language)
+    }
+
+    fun onSpokenLanguageChanged(spokenLanguage: SpokenLanguage?) {
+        _spokenLanguage.postValue(spokenLanguage)
     }
 }

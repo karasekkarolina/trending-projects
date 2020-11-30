@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import cz.blackchameleon.domain.DateRange
 import cz.blackchameleon.domain.Filter
 import cz.blackchameleon.trendingprojects.R
 import cz.blackchameleon.trendingprojects.ui.base.BaseFragment
@@ -49,19 +50,30 @@ class RepositoryFragment : BaseFragment(R.layout.fragment_repository) {
             repository_list,
             repositoryAdapter as ListAdapter<Any, RecyclerView.ViewHolder>
         )
-        language.text =
-            viewModel.language?.name ?: resources.getString(R.string.filter_any_language)
-        spoken_language.text =
-            viewModel.spokenLanguage?.name
-                ?: resources.getString(R.string.filter_any_spoken_language)
+        language.text = resources.getString(R.string.filter_any_language)
+        spoken_language.text = resources.getString(R.string.filter_any_spoken_language)
         date_range.text = resources.getString(R.string.filter_today)
     }
 
     private fun initObservers() {
+        viewModel.dateRange.observe(viewLifecycleOwner, {
+            date_range.text = when (it) {
+                DateRange.DAILY -> resources.getString(R.string.filter_today)
+                DateRange.WEEKLY -> resources.getString(R.string.filter_weekly)
+                DateRange.MONTHLY -> resources.getString(R.string.filter_monthly)
+            }
+        })
+        viewModel.language.observe(viewLifecycleOwner, {
+            language.text = it?.name ?: resources.getString(R.string.filter_any_language)
+        })
+
+        viewModel.spokenLanguage.observe(viewLifecycleOwner, {
+            spoken_language.text = it?.name ?: resources.getString(R.string.filter_any_spoken_language)
+        })
         viewModel.repositories.observe(viewLifecycleOwner, { list ->
             repositoryAdapter.apply {
                 submitList(list.sortedByDescending { it.currentPeriodStars.toInt() })
-                period = viewModel.dateRange
+                period = viewModel.dateRange.value ?: DateRange.DAILY
                 notifyDataSetChanged()
             }
             no_data_text.isVisible = list.isEmpty()
@@ -77,17 +89,19 @@ class RepositoryFragment : BaseFragment(R.layout.fragment_repository) {
             ) { filter ->
                 when (viewModel.currentFilterType) {
                     FilterViewModel.FilterType.LANGUAGE -> {
-                        if (viewModel.language != filter) {
-                            viewModel.language = filter
-                            language.text = filter?.name ?: resources.getString(R.string.filter_any_language)
+                        if (viewModel.language.value != filter) {
+                            viewModel.onLanguageChanged(filter)
+                            language.text =
+                                filter?.name ?: resources.getString(R.string.filter_any_language)
                             viewModel.initData(true)
                             swipe_layout.isRefreshing = true
                         }
                     }
                     FilterViewModel.FilterType.SPOKEN_LANGUAGE -> {
-                        if (viewModel.spokenLanguage != filter) {
-                            viewModel.spokenLanguage = filter
-                            spoken_language.text = filter?.name ?: resources.getString(R.string.filter_any_spoken_language)
+                        if (viewModel.spokenLanguage.value != filter) {
+                            viewModel.onSpokenLanguageChanged(filter)
+                            spoken_language.text = filter?.name
+                                ?: resources.getString(R.string.filter_any_spoken_language)
                             viewModel.initData(true)
                             swipe_layout.isRefreshing = true
                         }
@@ -104,18 +118,9 @@ class RepositoryFragment : BaseFragment(R.layout.fragment_repository) {
                 inflate(R.menu.date_range_filter)
                 setOnMenuItemClickListener { menuItem ->
                     when (menuItem.itemId) {
-                        R.id.daily -> {
-                            viewModel.onDailyFilterClicked()
-                            date_range.text = resources.getString(R.string.filter_today)
-                        }
-                        R.id.weekly -> {
-                            viewModel.onWeeklyFilterClicked()
-                            date_range.text = resources.getString(R.string.filter_weekly)
-                        }
-                        R.id.monthly -> {
-                            viewModel.onMonthlyFilterClicked()
-                            date_range.text = resources.getString(R.string.filter_monthly)
-                        }
+                        R.id.daily -> viewModel.onDailyFilterClicked()
+                        R.id.weekly -> viewModel.onWeeklyFilterClicked()
+                        R.id.monthly -> viewModel.onMonthlyFilterClicked()
                     }
                     swipe_layout.isRefreshing = true
                     true
@@ -125,12 +130,12 @@ class RepositoryFragment : BaseFragment(R.layout.fragment_repository) {
 
         language.setOnClickListener {
             viewModel.currentFilterType = FilterViewModel.FilterType.LANGUAGE
-            findNavController().navigate(RepositoryFragmentDirections.actionFilterFragment(viewModel.currentFilterType))
+            viewModel.currentFilterType?.let { findNavController().navigate(RepositoryFragmentDirections.actionFilterFragment(it)) }
         }
 
         spoken_language.setOnClickListener {
             viewModel.currentFilterType = FilterViewModel.FilterType.SPOKEN_LANGUAGE
-            findNavController().navigate(RepositoryFragmentDirections.actionFilterFragment(viewModel.currentFilterType))
+            viewModel.currentFilterType?.let { findNavController().navigate(RepositoryFragmentDirections.actionFilterFragment(it)) }
         }
     }
 
