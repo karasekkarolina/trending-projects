@@ -79,7 +79,7 @@
         android:layout_height="10dp"
         android:layout_marginEnd="@dimen/margin_padding_tiny"
         android:background="@drawable/solid_circle"
-        android:contentDescription="@string/avatar"
+        android:contentDescription="@string/language_color"
         app:layout_constraintBottom_toBottomOf="@id/language"
         app:layout_constraintEnd_toStartOf="@id/language"
         app:layout_constraintTop_toTopOf="@id/language" />

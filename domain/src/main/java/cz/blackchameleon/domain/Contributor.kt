@@ -1,5 +1,7 @@
 package cz.blackchameleon.domain
 
+import java.io.Serializable
+
 /**
  * Representation of contributor entity
  *
@@ -9,4 +11,4 @@ data class Contributor(
     val username: String,
     val href: String,
     val avatar: String
-)
+) : Serializable

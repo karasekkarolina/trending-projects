@@ -4,6 +4,8 @@
     <string name="no_data_found">No data found</string>
     <string name="error_occurred">An error occurred</string>
     <string name="offline_error">It seems you\'re offline. Please check your internet connection.</string>
+    <string name="language_color">language_color</string>
+    <string name="avatar">avatar_image</string>
 
     <!-- Repositories -->
     <string name="title_repositories">Trending repositories</string>
@@ -19,11 +21,11 @@
 
     <!-- Repository detail -->
     <string name="title_repository_detail">Repository detail</string>
+    <string name="hypertext_name"><![CDATA[<a href="%1$s">%2$s</a>]]></string>
 
     <!-- Developers -->
     <string name="title_developers">Developers</string>
     <string name="developer_list_loading_failed">Developer list loading failed</string>
-    <string name="avatar">avatar_image</string>
     <string name="url"><![CDATA[%1$s (<a href="%2$s">%3$s</a>)]]></string>
     <string name="sponsor_url"><![CDATA[<a href="%1$s">Donate</a>]]></string>
     <string name="repository_url"><![CDATA[<a href="%1$s">%2$s</a>]]></string>
@@ -35,5 +37,6 @@
     <string name="title_filter_fragment">Filter fragment</string>
     <string name="filter_any_language">Any language</string>
     <string name="filter_any_spoken_language">Any spoken language</string>
+    <string name="contributors">Contributors:</string>
 
 </resources>

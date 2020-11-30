@@ -40,7 +40,6 @@ class DeveloperAdapter : ListAdapter<Developer, DeveloperAdapter.ViewHolder>(
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(item: Developer) {
             itemView.apply {
-
                 avatar.setImage(item.avatar)
                 full_name.apply {
                     text = (HtmlCompat.fromHtml(
