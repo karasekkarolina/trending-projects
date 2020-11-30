@@ -15,7 +15,7 @@ import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 
 /**
- * Test class for SpokenLanguage repository logic
+ * Test class for spoken language repository logic
  *
  * @author Karolina Klepackova on 30.11.2020.
  */
