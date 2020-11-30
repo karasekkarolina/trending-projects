@@ -13,9 +13,6 @@ import cz.blackchameleon.trendingprojects.framework.database.db.ContributorDb
  */
 @Dao
 interface ContributorDao : BaseDao<ContributorDb> {
-    @Query("SELECT * FROM contributors")
-    suspend fun getContributors(): List<ContributorDb>
-
     @Query("SELECT * FROM contributors WHERE repository_url=:repositoryUrl")
     suspend fun findContributorsForRepository(repositoryUrl: String): List<ContributorDb>
 

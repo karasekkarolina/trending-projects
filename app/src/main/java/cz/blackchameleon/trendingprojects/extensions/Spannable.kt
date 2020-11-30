@@ -5,6 +5,8 @@ import android.text.TextPaint
 import android.text.style.UnderlineSpan
 
 /**
+ * Extension function that removes underlines from hypertext
+ *
  * @author Karolina Klepackova on 29.11.2020.
  */
 fun Spannable.removeUnderlines(): Spannable = apply {

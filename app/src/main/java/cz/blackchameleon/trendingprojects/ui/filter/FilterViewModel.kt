@@ -13,6 +13,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 /**
+ * View model that provides information what to display in view represented by [FilterFragment]
+ * @see BaseViewModel
+ *
+ * @param args contains which filter type should be shown
+ * @param getLanguages Use case [GetLanguages]
+ * @param getSpokenLanguages Use case [GetSpokenLanguages]
+ *
  * @author Karolina Klepackova on 30.11.2020.
  */
 class FilterViewModel(
@@ -33,29 +40,27 @@ class FilterViewModel(
 
     override fun initData(force: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
-            args.filter?.let {
-                when (it) {
-                    FilterType.LANGUAGE -> {
-                        getLanguages(force).let {
-                            when (it) {
-                                is Result.Success -> {
-                                    _filters.postValue(it.data)
-                                }
-                                is Result.Error -> {
-                                    _showError.postValue(R.string.developer_list_loading_failed)
-                                }
+            when (args.filter) {
+                FilterType.LANGUAGE -> {
+                    getLanguages(force).let {
+                        when (it) {
+                            is Result.Success -> {
+                                _filters.postValue(it.data)
+                            }
+                            is Result.Error -> {
+                                _showError.postValue(R.string.developer_list_loading_failed)
                             }
                         }
                     }
-                    FilterType.SPOKEN_LANGUAGE -> {
-                        getSpokenLanguages(force).let {
-                            when (it) {
-                                is Result.Success -> {
-                                    _filters.postValue(it.data)
-                                }
-                                is Result.Error -> {
-                                    _showError.postValue(R.string.developer_list_loading_failed)
-                                }
+                }
+                FilterType.SPOKEN_LANGUAGE -> {
+                    getSpokenLanguages(force).let {
+                        when (it) {
+                            is Result.Success -> {
+                                _filters.postValue(it.data)
+                            }
+                            is Result.Error -> {
+                                _showError.postValue(R.string.developer_list_loading_failed)
                             }
                         }
                     }

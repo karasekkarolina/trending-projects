@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import cz.blackchameleon.domain.Repository
 import cz.blackchameleon.trendingprojects.ui.base.BaseViewModel
-import cz.blackchameleon.usecases.repository.GetRepository
 
 /**
  * View model that provides information what to display in view represented by [RepositoryDetailFragment]

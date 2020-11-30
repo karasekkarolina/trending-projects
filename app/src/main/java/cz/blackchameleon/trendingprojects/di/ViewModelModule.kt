@@ -16,7 +16,7 @@ import org.koin.dsl.module
  */
 val viewModelModule = module {
     viewModel { DeveloperViewModel(get()) }
-    viewModel { RepositoryViewModel(get(), get(), get()) }
+    viewModel { RepositoryViewModel(get()) }
     viewModel { (args: RepositoryDetailFragmentArgs) -> RepositoryDetailViewModel(args) }
     viewModel { (args: FilterFragmentArgs) -> FilterViewModel(args, get(), get()) }
 }

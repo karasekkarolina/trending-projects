@@ -19,13 +19,6 @@ class RepositoryRepository(
     private val localRepositorySource: LocalRepositorySource,
     private val remoteRepositorySource: RemoteRepositorySource
 ) {
-    suspend fun getRepository(url: String): Result<Repository> =
-        withContext(coroutineContext) {
-            localRepositorySource.getRepository(url)?.let {
-                return@withContext Result.Success(it)
-            } ?: Result.Error("Repository not found")
-        }
-
     suspend fun getRepositories(
         force: Boolean,
         dateRange: DateRange? = null,

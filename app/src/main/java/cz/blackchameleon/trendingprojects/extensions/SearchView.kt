@@ -4,6 +4,8 @@ import androidx.appcompat.widget.SearchView
 import java.util.*
 
 /**
+ * Extension function that handles text changes in search view and invokes listener for searching operations
+ *
  * @author Karolina Klepackova on 30.11.2020.
  */
 fun SearchView.afterTextChangedDelayed(delay: Long = 500, afterTextChanged: (String) -> Unit) {

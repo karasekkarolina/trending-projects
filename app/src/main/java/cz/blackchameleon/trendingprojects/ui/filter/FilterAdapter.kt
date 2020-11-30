@@ -11,6 +11,10 @@ import cz.blackchameleon.trendingprojects.R
 import kotlinx.android.synthetic.main.item_filter.view.*
 
 /**
+ * Handles filter list items logic
+ *
+ * @param clickListener Provides exact filter on which user clicked
+ *
  * @author Karolina Klepackova on 30.11.2020.
  */
 class FilterAdapter(

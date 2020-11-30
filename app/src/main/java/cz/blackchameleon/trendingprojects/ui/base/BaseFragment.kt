@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import cz.blackchameleon.trendingprojects.R
 
 /**
+ * Base fragment class that provides common functionality of fragments
+ *
  * @author Karolina Klepackova on 27.11.2020.
  */
 abstract class BaseFragment(layout: Int) : Fragment(layout) {
@@ -33,6 +35,9 @@ abstract class BaseFragment(layout: Int) : Fragment(layout) {
         })
     }
 
+    /**
+     * Inits given recycler and its adapter
+     */
     fun initRecycler(recyclerView: RecyclerView, adapter: ListAdapter<Any, RecyclerView.ViewHolder>) {
         recyclerView.apply {
             this.adapter = adapter

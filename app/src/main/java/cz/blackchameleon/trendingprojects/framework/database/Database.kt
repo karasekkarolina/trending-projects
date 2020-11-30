@@ -8,7 +8,8 @@ import cz.blackchameleon.trendingprojects.framework.database.dao.*
 import cz.blackchameleon.trendingprojects.framework.database.db.*
 
 /**
- * Room database object with 2 given entities [DeveloperDao], [RepositoryDao]
+ * Room database object with 5 given entities [DeveloperDao], [RepositoryDao], [ContributorDb], [LanguageDb], [SpokenLanguageDb]
+ * Used as a local data source
  *
  * @author Karolina Klepackova on 27.11.2020.
  */
@@ -36,7 +37,7 @@ abstract class Database : RoomDatabase() {
 
     companion object {
         private const val DB_NAME = "database"
-        var instance: Database? = null
+        private var instance: Database? = null
 
         fun getInstance(context: Context): Database? {
             if (instance == null) {

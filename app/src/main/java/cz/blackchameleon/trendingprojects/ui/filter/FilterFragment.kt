@@ -15,6 +15,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 /**
+ * Fragment that handles UI for filters
+ * @suppress (Unchecked cast) applied on List adapter cast
+ *
  * @author Karolina Klepackova on 30.11.2020.
  */
 @Suppress("UNCHECKED_CAST")

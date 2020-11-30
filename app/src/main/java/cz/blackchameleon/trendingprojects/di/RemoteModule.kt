@@ -12,6 +12,7 @@ import org.koin.dsl.module
 
 /**
  * Koin module for remote sources
+ * Cast to sources is necessary, do not remove
  *
  * @author Karolina Klepackova on 27.11.2020.
  */

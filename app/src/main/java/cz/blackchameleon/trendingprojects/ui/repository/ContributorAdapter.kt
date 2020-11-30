@@ -15,6 +15,8 @@ import cz.blackchameleon.trendingprojects.extensions.setImage
 import kotlinx.android.synthetic.main.item_contributor.view.*
 
 /**
+ * Handles contributor list items logic
+ *
  * @author Karolina Klepackova on 30.11.2020.
  */
 class ContributorAdapter : ListAdapter<Contributor, ContributorAdapter.ViewHolder>(

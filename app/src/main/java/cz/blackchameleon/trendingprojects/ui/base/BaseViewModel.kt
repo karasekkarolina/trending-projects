@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 /**
+ * Base view model class that provides common functionality of view models
+ *
  * @author Karolina Klepackova on 27.11.2020.
  */
 abstract class BaseViewModel : ViewModel() {

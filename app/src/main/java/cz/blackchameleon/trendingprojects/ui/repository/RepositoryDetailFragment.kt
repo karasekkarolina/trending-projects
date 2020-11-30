@@ -18,11 +18,14 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 /**
- * Fragment that handles UI for developer list
+ * Fragment that handles UI for repository detail
+ * @suppress (Unchecked cast) applied on List adapter cast
+ *
  * @see BaseFragment
  *
  * @author Karolina Klepackova on 27.11.2020.
  */
+@Suppress("UNCHECKED_CAST")
 class RepositoryDetailFragment : BaseFragment(R.layout.fragment_repository_detail) {
 
     override val viewModel: RepositoryDetailViewModel by viewModel { parametersOf(args) }

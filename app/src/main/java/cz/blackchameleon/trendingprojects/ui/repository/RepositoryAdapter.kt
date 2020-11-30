@@ -18,6 +18,8 @@ import kotlinx.android.synthetic.main.item_repository.view.*
 /**
  * Handles repository list items logic
  *
+ * @param clickListener Provides exact repository on which user clicked
+ *
  * @author Karolina Klepackova on 27.11.2020.
  */
 class RepositoryAdapter(

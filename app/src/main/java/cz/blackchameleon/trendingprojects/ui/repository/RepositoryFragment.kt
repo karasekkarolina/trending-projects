@@ -16,7 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Fragment that handles UI for repository list
- * * @suppress Unchecked cast applied on List adapter cast
+ * @suppress (Unchecked cast) applied on List adapter cast
  * @see BaseFragment
  *
  * @author Karolina Klepackova on 27.11.2020.
@@ -58,13 +58,13 @@ class RepositoryFragment : BaseFragment(R.layout.fragment_repository) {
     }
 
     private fun initObservers() {
-        viewModel.repositories.observe(viewLifecycleOwner, {
+        viewModel.repositories.observe(viewLifecycleOwner, { list ->
             repositoryAdapter.apply {
-                submitList(it)
+                submitList(list.sortedByDescending { it.currentPeriodStars.toInt() })
                 period = viewModel.dateRange
                 notifyDataSetChanged()
             }
-            no_data_text.isVisible = it.isEmpty()
+            no_data_text.isVisible = list.isEmpty()
             setLoadingVisibility(false)
         })
         viewModel.showEmptyState.observe(viewLifecycleOwner, {

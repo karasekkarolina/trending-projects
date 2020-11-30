@@ -8,7 +8,7 @@ import cz.blackchameleon.domain.Contributor
 
 /**
  * Contributor entity representation in DB
- * Defines DB table
+ * Defines DB table and is connected to repositories table in DB
  *
  * @author Karolina Klepackova on 29.11.2020.
  */
