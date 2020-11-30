@@ -50,9 +50,12 @@ class RepositoryFragment : BaseFragment(R.layout.fragment_repository) {
             repository_list,
             repositoryAdapter as ListAdapter<Any, RecyclerView.ViewHolder>
         )
-        language.text = resources.getString(R.string.filter_any_language)
-        spoken_language.text = resources.getString(R.string.filter_any_spoken_language)
-        date_range.text = resources.getString(R.string.filter_today)
+        language.text =
+            viewModel.language.value?.name ?: resources.getString(R.string.filter_any_language)
+        spoken_language.text = viewModel.spokenLanguage.value?.name
+            ?: resources.getString(R.string.filter_any_spoken_language)
+        date_range.text =
+            viewModel.dateRange.value?.name ?: resources.getString(R.string.filter_today)
     }
 
     private fun initObservers() {
@@ -68,7 +71,8 @@ class RepositoryFragment : BaseFragment(R.layout.fragment_repository) {
         })
 
         viewModel.spokenLanguage.observe(viewLifecycleOwner, {
-            spoken_language.text = it?.name ?: resources.getString(R.string.filter_any_spoken_language)
+            spoken_language.text =
+                it?.name ?: resources.getString(R.string.filter_any_spoken_language)
         })
         viewModel.repositories.observe(viewLifecycleOwner, { list ->
             repositoryAdapter.apply {
@@ -93,7 +97,6 @@ class RepositoryFragment : BaseFragment(R.layout.fragment_repository) {
                             viewModel.onLanguageChanged(filter)
                             language.text =
                                 filter?.name ?: resources.getString(R.string.filter_any_language)
-                            viewModel.initData(true)
                             swipe_layout.isRefreshing = true
                         }
                     }
@@ -102,7 +105,6 @@ class RepositoryFragment : BaseFragment(R.layout.fragment_repository) {
                             viewModel.onSpokenLanguageChanged(filter)
                             spoken_language.text = filter?.name
                                 ?: resources.getString(R.string.filter_any_spoken_language)
-                            viewModel.initData(true)
                             swipe_layout.isRefreshing = true
                         }
                     }
@@ -130,12 +132,23 @@ class RepositoryFragment : BaseFragment(R.layout.fragment_repository) {
 
         language.setOnClickListener {
             viewModel.currentFilterType = FilterViewModel.FilterType.LANGUAGE
-            viewModel.currentFilterType?.let { findNavController().navigate(RepositoryFragmentDirections.actionFilterFragment(it)) }
+            viewModel.currentFilterType?.let {
+                findNavController().navigate(
+                    RepositoryFragmentDirections.actionFilterFragment(it, viewModel.language.value)
+                )
+            }
         }
 
         spoken_language.setOnClickListener {
             viewModel.currentFilterType = FilterViewModel.FilterType.SPOKEN_LANGUAGE
-            viewModel.currentFilterType?.let { findNavController().navigate(RepositoryFragmentDirections.actionFilterFragment(it)) }
+            viewModel.currentFilterType?.let {
+                findNavController().navigate(
+                    RepositoryFragmentDirections.actionFilterFragment(
+                        it,
+                        viewModel.spokenLanguage.value
+                    )
+                )
+            }
         }
     }
 

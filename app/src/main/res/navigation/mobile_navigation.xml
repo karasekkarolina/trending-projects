@@ -44,5 +44,9 @@
         <argument
             android:name="filter"
             app:argType="cz.blackchameleon.trendingprojects.ui.filter.FilterViewModel$FilterType" />
+        <argument
+            android:name="selectedFilter"
+            app:argType="cz.blackchameleon.domain.Filter"
+            app:nullable="true" />
     </fragment>
 </navigation>

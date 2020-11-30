@@ -78,9 +78,11 @@ class RepositoryViewModel(
 
     fun onLanguageChanged(language: Language?) {
         _language.postValue(language)
+        initData(true)
     }
 
     fun onSpokenLanguageChanged(spokenLanguage: SpokenLanguage?) {
         _spokenLanguage.postValue(spokenLanguage)
+        initData(true)
     }
 }

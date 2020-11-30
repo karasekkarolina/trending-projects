@@ -31,6 +31,9 @@ class FilterFragment : BaseFragment(R.layout.fragment_filter) {
     private val filterAdapter: FilterAdapter by lazy {
         FilterAdapter {
             findNavController().run {
+                if (args.selectedFilter == it) {
+                    popBackStack()
+                }
                 when (args.filter) {
                     FilterViewModel.FilterType.LANGUAGE -> previousBackStackEntry?.savedStateHandle?.set(
                         "filter",
@@ -48,8 +51,6 @@ class FilterFragment : BaseFragment(R.layout.fragment_filter) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        findNavController().previousBackStackEntry?.savedStateHandle?.set("filter", null)
 
         initRecycler(
             filter_list,
