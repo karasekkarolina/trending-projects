@@ -75,7 +75,7 @@ class FilterViewModel(
 
         searchedFilters.run {
             _filters.value?.forEach {
-                if (it.name.contains(string)) add(it)
+                if (it.name.toLowerCase().contains(string.toLowerCase())) add(it)
             }
         }
         _searchedFilters.postValue(searchedFilters)
