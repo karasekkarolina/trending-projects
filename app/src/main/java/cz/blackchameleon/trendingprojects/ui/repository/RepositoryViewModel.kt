@@ -62,27 +62,27 @@ class RepositoryViewModel(
     }
 
     fun onDailyFilterClicked() {
-        _dateRange.postValue(DateRange.DAILY)
+        _dateRange.value = DateRange.DAILY
         initData(true)
     }
 
     fun onWeeklyFilterClicked() {
-        _dateRange.postValue(DateRange.MONTHLY)
+        _dateRange.value = DateRange.WEEKLY
         initData(true)
     }
 
     fun onMonthlyFilterClicked() {
-        _dateRange.postValue(DateRange.MONTHLY)
+        _dateRange.value = DateRange.MONTHLY
         initData(true)
     }
 
     fun onLanguageChanged(language: Language?) {
-        _language.postValue(language)
+        _language.value = language
         initData(true)
     }
 
     fun onSpokenLanguageChanged(spokenLanguage: SpokenLanguage?) {
-        _spokenLanguage.postValue(spokenLanguage)
+        _spokenLanguage.value = spokenLanguage
         initData(true)
     }
 }
